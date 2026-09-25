@@ -178,7 +178,7 @@
                         </p>
 
                         <p class="mt-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
-                            {{ $total_users ?? $usuarios->total() }}
+                            
                         </p>
 
                     </div>
@@ -209,6 +209,7 @@
 
 
             {{-- ADMINISTRADORES --}}
+
             <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md sm:p-6">
 
                 <div class="flex items-center justify-between">
@@ -317,9 +318,7 @@
 
                     <span class="w-fit rounded-full bg-slate-100 px-3 py-1.5 text-xs font-bold text-slate-500">
 
-                        {{ $usuarios->total() }}
-
-                        {{ $usuarios->total() == 1 ? 'usuário' : 'usuários' }}
+                  
 
                     </span>
 

@@ -11,12 +11,12 @@ class UserController extends Controller
     # function admin_home
     public function index() {
 
-        $users = User::all();
+        $usuarios= User::paginate(10);
         $editores = User::where('role', 'editor')->count();
         $administradores = User::where('role', 'Admin')->count();
         $espectantes = User::where('role', 'user')->count();
 
-        return view('Admin.index', compact('users', 'editores','administradores','espectantes'));
+        return view('Admin.Entidades.index', compact('usuarios', 'editores','administradores','espectantes'));
 
 
     }
