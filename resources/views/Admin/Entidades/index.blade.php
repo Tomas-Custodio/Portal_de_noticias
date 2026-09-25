@@ -10,10 +10,10 @@
 
     <div class="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
 
-
         {{-- =========================================================
             HEADER
         ========================================================== --}}
+        
         <header class="mb-8">
 
             <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
@@ -43,43 +43,8 @@
 
 
                 {{-- AÇÕES --}}
+
                 <div class="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
-
-                    {{-- LOGOUT --}}
-                    <form
-                        action="{{ route('logout') }}"
-                        method="POST"
-                        class="w-full sm:w-auto"
-                    >
-
-                        @csrf
-
-                        <button
-                            type="submit"
-                            class="group flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-600 shadow-sm transition-all duration-200 hover:border-red-200 hover:bg-red-50 hover:text-red-600 focus:outline-none focus:ring-4 focus:ring-red-500/10 sm:w-auto"
-                        >
-
-                            {{-- ÍCONE LOGOUT --}}
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
-                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-                                <path d="m16 17 5-5-5-5"/>
-                                <path d="M21 12H9"/>
-                            </svg>
-
-                            Logout
-
-                        </button>
-
-                    </form>
 
 
                     {{-- NOVO USUÁRIO --}}
@@ -112,11 +77,10 @@
 
         </header>
 
-
-
         {{-- =========================================================
             MENSAGEM
         ========================================================== --}}
+
         @if(session('msg'))
 
             <div class="mb-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
@@ -159,7 +123,6 @@
         @endif
 
 
-
         {{-- =========================================================
             3 CARDS
         ========================================================== --}}
@@ -167,6 +130,7 @@
 
 
             {{-- TOTAL --}}
+
             <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md sm:p-6">
 
                 <div class="flex items-center justify-between">
@@ -178,10 +142,11 @@
                         </p>
 
                         <p class="mt-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
-                            
+                            {{ $usuarios->count() }}
                         </p>
 
                     </div>
+
 
                     <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-50 text-orange-500">
 
@@ -221,7 +186,7 @@
                         </p>
 
                         <p class="mt-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
-                            {{ $total_admins ?? 0 }}
+                            {{ $administradores }}
                         </p>
 
                     </div>
@@ -261,7 +226,7 @@
                         </p>
 
                         <p class="mt-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
-                            {{ $total_editores ?? 0 }}
+                            {{ $editores }}
                         </p>
 
                     </div>
