@@ -427,7 +427,7 @@
                                         <div class="min-w-0">
 
                                             <p class="truncate text-sm font-semibold text-slate-800">
-                                                {{ $noticia->titulo }}
+                                                {{Str::limit($noticia->titulo,20)  }}
                                             </p>
 
                                             <p class="mt-0.5 line-clamp-1 max-w-md text-[11px] text-slate-400">

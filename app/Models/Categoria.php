@@ -3,12 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-Use App\Models\Noticia;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Categoria extends Model
 {
-
+    use HasFactory;
     protected $fillable = [
 
         "nome",

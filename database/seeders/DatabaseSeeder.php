@@ -16,5 +16,12 @@ class DatabaseSeeder extends Seeder
             'role'     => 'admin',
             'password' => Hash::make('password123'),   // ⬅️ password encriptada
         ]);
+
+        $this->call([
+            UserSeeder::class,
+            CategoriaSeeder::class,
+            NoticiaSeeder::class,
+        ]);
+
     }
 }

@@ -490,43 +490,9 @@
 
                             {{-- USER --}}
 
-                            <div>
+                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 
-                                <label for="user_id"
-                                       class="mb-2 block text-sm font-semibold text-slate-700">
-
-                                    Autor
-
-                                    <span class="text-red-500">*</span>
-
-                                </label>
-
-                                <select
-                                    name="user_id"
-                                    id="user_id"
-                                    class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm text-slate-700 outline-none transition focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-500/10"
-                                    required
-                                >
-
-                                    <option value="">
-                                        Selecionar autor
-                                    </option>
-
-                                    @foreach($users as $user)
-
-                                        <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
-                                            {{ $user->nome }}
-                                        </option>
-
-                                    @endforeach
-
-                                </select>
-
-                            </div>
-
-                        </div>
-
-                    </div>
+                            
 
 
                     {{-- INFORMATION CARD --}}
