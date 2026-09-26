@@ -272,8 +272,8 @@
 
                     {{-- PESQUISA --}}
                     <form
-                        action="{{ route('categorias.home') }}"
-                        method="GET"
+                        action="{{ route('categorias.search') }}"
+                        method="Post"
                         class="flex w-full items-center gap-2 sm:w-auto"
                     >
 
