@@ -49,9 +49,7 @@
                     onchange="if (this.value) window.location.href = this.value;"
                     class="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-600 outline-none transition hover:border-blue-300 hover:bg-blue-50 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
                 >
-                    <option value="{{ route('noticias.list') }}" {{ request()->routeIs('noticias.list') ? 'selected' : '' }}>
-                        Mais recentes
-                    </option>
+                  
                     <option value="{{ route('noticias.recentes') }}" {{ request()->routeIs('noticias.recentes') ? 'selected' : '' }}>
                         Informações novas
                     </option>

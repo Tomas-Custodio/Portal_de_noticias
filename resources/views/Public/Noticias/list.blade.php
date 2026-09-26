@@ -47,9 +47,7 @@
                 onchange="if (this.value) window.location.href = this.value;"
                 class="..."
                     >
-            <option value="{{ route('noticias.list') }}" {{ request()->routeIs('noticias.list') ? 'selected' : '' }}>
-                Mais recentes
-            </option>
+
             <option value="{{ route('noticias.recentes') }}" {{ request()->routeIs('noticias.recentes') ? 'selected' : '' }}>
                 Informações novas
             </option>
