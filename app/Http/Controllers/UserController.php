@@ -34,7 +34,7 @@ class UserController extends Controller
                             ->orWhere('name', 'like', "%{$termo}%")
                             ->orWhere('email', 'like', "%{$termo}%")->paginate(15);
 
-            return view('Admin/Users/search', compact('usuarios','termo','administradores','editores')); };
+            return view('Admin/Users/search', compact('termo','resultado')); };
             
         }
 
