@@ -35,18 +35,34 @@
             </div>
 
 
-            {{-- CONTADOR --}}
+            {{-- CONTADOR + FILTRO --}}
+            <div class="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between md:justify-end">
 
-            <span class="inline-flex self-start rounded-full bg-blue-50 px-4 py-2 text-xs font-bold uppercase tracking-wider text-blue-600 md:self-auto">
-                {{ $noticias->total() }} {{ $noticias->total() === 1 ? 'notícia' : 'notícias' }}
-            </span>
+                <span class="inline-flex rounded-full bg-blue-50 px-4 py-2 text-xs font-bold uppercase tracking-wider text-blue-600">
+                    {{ $noticias->total() }} {{ $noticias->total() === 1 ? 'notícia' : 'notícias' }}
+                </span>
+
+
+                <select
+                onchange="if (this.value) window.location.href = this.value;"
+                class="..."
+                    >
+            <option value="{{ route('noticias.list') }}" {{ request()->routeIs('noticias.list') ? 'selected' : '' }}>
+                Mais recentes
+            </option>
+            <option value="{{ route('noticias.recentes') }}" {{ request()->routeIs('noticias.recentes') ? 'selected' : '' }}>
+                Informações novas
+            </option>
+            <option value="{{ route('noticias.antigas') }}" {{ request()->routeIs('noticias.antigas') ? 'selected' : '' }}>
+                Informações antigas
+            </option>
+        </select>
+            </div>
 
         </div>
 
 
         {{-- GRID DE NOTÍCIAS --}}
-
-        
         @if($noticias->isEmpty())
 
             <div class="rounded-3xl border border-slate-200 bg-white p-12 text-center">
@@ -125,18 +141,14 @@
 
 
                             {{-- META --}}
-
                             <div class="mt-4 flex items-center justify-end gap-2 border-t border-slate-100 pt-4 text-xs text-slate-400">
 
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
 
-                                <span class="inline-flex items-center gap-1.5">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                                        <circle cx="12" cy="7" r="4"/>
-                                    </svg>
-                                </span>
-
-                                <span> {{$noticia->usuario->nome}}</span>
+                                <span>{{ $noticia->usuario->nome ?? 'Redação' }}</span>
 
                             </div>
 
