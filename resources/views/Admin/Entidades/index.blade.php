@@ -23,7 +23,7 @@
 
                     <div class="mb-2 flex items-center gap-2">
 
-                        <span class="h-2 w-2 rounded-full bg-orange-500"></span>
+                        <span class="h-2 w-2 rounded-full bg-blue-600"></span>
 
                         <span class="text-xs font-bold uppercase tracking-widest text-slate-400">
                             Administração
@@ -50,7 +50,7 @@
                     {{-- NOVO USUÁRIO --}}
                     <a
                         href="{{ route('users.create') }}"
-                        class="group flex w-full items-center justify-center gap-2 rounded-xl bg-orange-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-orange-500/20 transition-all duration-200 hover:bg-orange-600 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-500/20 sm:w-auto"
+                        class="group flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition-all duration-200 hover:bg-blue-700 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-500/20 sm:w-auto"
                     >
 
                         <svg
@@ -266,7 +266,7 @@
             {{-- CABEÇALHO DA LISTA --}}
             <div class="border-b border-slate-100 px-5 py-5 sm:px-6">
 
-                <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
                     <div>
 
@@ -281,11 +281,53 @@
                     </div>
 
 
-                    <span class="w-fit rounded-full bg-slate-100 px-3 py-1.5 text-xs font-bold text-slate-500">
+                    {{-- PESQUISA --}}
+                    <form
+                        action="{{ route('users.home') }}"
+                        method="GET"
+                        class="flex w-full items-center gap-2 sm:w-auto"
+                    >
 
-                  
+                        {{-- INPUT DE PESQUISA --}}
+                        <div class="group/search relative flex-1 sm:w-72">
 
-                    </span>
+                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 transition group-focus-within/search:text-blue-600">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="7"/>
+                                    <path d="m21 21-4.3-4.3"/>
+                                </svg>
+
+                            </div>
+
+
+                            <input
+                                type="text"
+                                name="search"
+                                value="{{ request('search') }}"
+                                placeholder="Pesquisar usuário..."
+                                class="w-full rounded-xl border border-slate-200 bg-slate-50 py-2.5 pl-10 pr-4 text-sm text-slate-800 outline-none transition duration-200 placeholder:text-slate-400 hover:border-slate-300 hover:bg-white focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10"
+                            >
+
+                        </div>
+
+
+                        {{-- BOTÃO PESQUISAR --}}
+                        <button
+                            type="submit"
+                            class="group inline-flex shrink-0 items-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition duration-200 hover:bg-blue-700 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-500/30 active:scale-[0.98]"
+                        >
+
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="7"/>
+                                <path d="m21 21-4.3-4.3"/>
+                            </svg>
+
+                            <span class="hidden sm:inline">Pesquisar</span>
+
+                        </button>
+
+                    </form>
 
                 </div>
 
@@ -345,7 +387,7 @@
 
                                     <div class="flex items-center gap-3">
 
-                                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange-50 text-sm font-bold text-orange-600 transition-colors group-hover:bg-orange-500 group-hover:text-white">
+                                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange-50 text-sm font-bold text-orange-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
 
                                             {{ strtoupper(substr($nome, 0, 1)) }}
 
@@ -492,7 +534,37 @@
                                     colspan="4"
                                     class="px-6 py-16 text-center text-sm text-slate-500"
                                 >
-                                    Nenhum usuário registado.
+
+                                    @if(request('search'))
+
+                                        <p class="font-semibold text-slate-700">
+                                            Sem resultados para "<span class="text-blue-600">{{ request('search') }}</span>"
+                                        </p>
+
+                                        <p class="mt-1 text-xs text-slate-400">
+                                            Tenta pesquisar por outro termo.
+                                        </p>
+
+                                        <a
+                                            href="{{ route('users.home') }}"
+                                            class="mt-5 inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600"
+                                        >
+
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M19 12H5"/>
+                                                <path d="m12 19-7-7 7-7"/>
+                                            </svg>
+
+                                            Ver todos
+
+                                        </a>
+
+                                    @else
+
+                                        Nenhum usuário registado.
+
+                                    @endif
+
                                 </td>
 
                             </tr>
@@ -642,7 +714,37 @@
                 @empty
 
                     <div class="px-5 py-12 text-center text-sm text-slate-500">
-                        Nenhum usuário registado.
+
+                        @if(request('search'))
+
+                            <p class="font-semibold text-slate-700">
+                                Sem resultados para "<span class="text-blue-600">{{ request('search') }}</span>"
+                            </p>
+
+                            <p class="mt-1 text-xs text-slate-400">
+                                Tenta pesquisar por outro termo.
+                            </p>
+
+                            <a
+                                href="{{ route('users.home') }}"
+                                class="mt-5 inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600"
+                            >
+
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M19 12H5"/>
+                                    <path d="m12 19-7-7 7-7"/>
+                                </svg>
+
+                                Ver todos
+
+                            </a>
+
+                        @else
+
+                            Nenhum usuário registado.
+
+                        @endif
+
                     </div>
 
                 @endforelse

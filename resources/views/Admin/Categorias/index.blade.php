@@ -7,7 +7,7 @@
 
 <div class="min-h-screen bg-slate-50">
 
-    <div class="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
 
         {{-- =========================================================
             HEADER
@@ -255,7 +255,7 @@
             {{-- CABEÇALHO --}}
             <div class="border-b border-slate-100 px-5 py-5 sm:px-6">
 
-                <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
                     <div>
 
@@ -270,19 +270,53 @@
                     </div>
 
 
-                    <a
-                        href="{{ route('categorias.list') }}"
-                        class="inline-flex w-fit items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-600"
+                    {{-- PESQUISA --}}
+                    <form
+                        action="{{ route('categorias.home') }}"
+                        method="GET"
+                        class="flex w-full items-center gap-2 sm:w-auto"
                     >
 
-                        Ver todas
+                        {{-- INPUT DE PESQUISA --}}
+                        <div class="group/search relative flex-1 sm:w-72">
 
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 12h14"/>
-                            <path d="m13 6 6 6-6 6"/>
-                        </svg>
+                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 transition group-focus-within/search:text-indigo-600">
 
-                    </a>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="7"/>
+                                    <path d="m21 21-4.3-4.3"/>
+                                </svg>
+
+                            </div>
+
+
+                            <input
+                                type="text"
+                                name="search"
+                                value="{{ request('search') }}"
+                                placeholder="Pesquisar categoria..."
+                                class="w-full rounded-xl border border-slate-200 bg-slate-50 py-2.5 pl-10 pr-4 text-sm text-slate-800 outline-none transition duration-200 placeholder:text-slate-400 hover:border-slate-300 hover:bg-white focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-500/10"
+                            >
+
+                        </div>
+
+
+                        {{-- BOTÃO PESQUISAR --}}
+                        <button
+                            type="submit"
+                            class="group inline-flex shrink-0 items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-600/20 transition duration-200 hover:bg-indigo-700 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-indigo-500/30 active:scale-[0.98]"
+                        >
+
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="7"/>
+                                <path d="m21 21-4.3-4.3"/>
+                            </svg>
+
+                            <span class="hidden sm:inline">Pesquisar</span>
+
+                        </button>
+
+                    </form>
 
                 </div>
 
@@ -389,26 +423,58 @@
 
                 <div class="px-6 py-16 text-center">
 
-                    <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-100 text-slate-400">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M3 6a2 2 0 0 1 2-2h3l2 2h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                        </svg>
-                    </div>
+                    @if(request('search'))
 
-                    <h3 class="text-lg font-bold text-slate-900">
-                        Sem categorias com notícias
-                    </h3>
+                        <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-100 text-slate-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="7"/>
+                                <path d="m21 21-4.3-4.3"/>
+                            </svg>
+                        </div>
 
-                    <p class="mt-2 text-sm text-slate-500">
-                        Ainda não há categorias associadas a notícias.
-                    </p>
+                        <h3 class="text-lg font-bold text-slate-900">
+                            Sem resultados
+                        </h3>
 
-                    <a
-                        href="{{ route('categorias.list') }}"
-                        class="mt-5 inline-flex rounded-xl bg-indigo-600 px-5 py-3 text-sm font-bold text-white hover:bg-indigo-700"
-                    >
-                        Ver todas as categorias
-                    </a>
+                        <p class="mt-2 text-sm text-slate-500">
+                            Não encontrámos categorias com "<span class="font-semibold text-indigo-600">{{ request('search') }}</span>".
+                        </p>
+
+                        <a
+                            href="{{ route('categorias.home') }}"
+                            class="mt-5 inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-600"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 12H5"/>
+                                <path d="m12 19-7-7 7-7"/>
+                            </svg>
+                            Limpar pesquisa
+                        </a>
+
+                    @else
+
+                        <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-100 text-slate-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 6a2 2 0 0 1 2-2h3l2 2h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            </svg>
+                        </div>
+
+                        <h3 class="text-lg font-bold text-slate-900">
+                            Sem categorias com notícias
+                        </h3>
+
+                        <p class="mt-2 text-sm text-slate-500">
+                            Ainda não há categorias associadas a notícias.
+                        </p>
+
+                        <a
+                            href="{{ route('categorias.list') }}"
+                            class="mt-5 inline-flex rounded-xl bg-indigo-600 px-5 py-3 text-sm font-bold text-white hover:bg-indigo-700"
+                        >
+                            Ver todas as categorias
+                        </a>
+
+                    @endif
 
                 </div>
 

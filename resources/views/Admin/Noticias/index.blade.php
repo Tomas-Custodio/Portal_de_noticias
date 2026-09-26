@@ -303,7 +303,7 @@
             {{-- CABEÇALHO --}}
             <div class="border-b border-slate-100 px-5 py-5 sm:px-6">
 
-                <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
                     <div>
 
@@ -318,19 +318,53 @@
                     </div>
 
 
-                    <a
-                        href="{{ route('noticias.create') }}"
-                        class="inline-flex w-fit items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-600"
+                    {{-- PESQUISA --}}
+                    <form
+                        action="{{ route('noticias.home') }}"
+                        method="GET"
+                        class="flex w-full items-center gap-2 sm:w-auto"
                     >
 
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 5v14"/>
-                            <path d="M5 12h14"/>
-                        </svg>
+                        {{-- INPUT DE PESQUISA --}}
+                        <div class="group/search relative flex-1 sm:w-72">
 
-                        Nova notícia
+                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 transition group-focus-within/search:text-indigo-600">
 
-                    </a>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="7"/>
+                                    <path d="m21 21-4.3-4.3"/>
+                                </svg>
+
+                            </div>
+
+
+                            <input
+                                type="text"
+                                name="search"
+                                value="{{ request('search') }}"
+                                placeholder="Pesquisar notícia..."
+                                class="w-full rounded-xl border border-slate-200 bg-slate-50 py-2.5 pl-10 pr-4 text-sm text-slate-800 outline-none transition duration-200 placeholder:text-slate-400 hover:border-slate-300 hover:bg-white focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-500/10"
+                            >
+
+                        </div>
+
+
+                        {{-- BOTÃO PESQUISAR --}}
+                        <button
+                            type="submit"
+                            class="group inline-flex shrink-0 items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-600/20 transition duration-200 hover:bg-indigo-700 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-indigo-500/30 active:scale-[0.98]"
+                        >
+
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="7"/>
+                                <path d="m21 21-4.3-4.3"/>
+                            </svg>
+
+                            <span class="hidden sm:inline">Pesquisar</span>
+
+                        </button>
+
+                    </form>
 
                 </div>
 
@@ -521,7 +555,35 @@
                             <tr>
 
                                 <td colspan="5" class="px-6 py-16 text-center text-sm text-slate-500">
-                                    Nenhuma notícia registada.
+
+                                    @if(request('search'))
+
+                                        <p class="font-semibold text-slate-700">
+                                            Sem resultados para "<span class="text-indigo-600">{{ request('search') }}</span>"
+                                        </p>
+
+                                        <p class="mt-1 text-xs text-slate-400">
+                                            Tenta pesquisar por outro termo.
+                                        </p>
+
+                                        <a href="{{ route('noticias.home') }}"
+                                           class="mt-5 inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-600">
+
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M19 12H5"/>
+                                                <path d="m12 19-7-7 7-7"/>
+                                            </svg>
+
+                                            Ver todas
+
+                                        </a>
+
+                                    @else
+
+                                        Nenhuma notícia registada.
+
+                                    @endif
+
                                 </td>
 
                             </tr>
@@ -643,7 +705,28 @@
                 @empty
 
                     <div class="px-5 py-12 text-center text-sm text-slate-500">
-                        Nenhuma notícia registada.
+
+                        @if(request('search'))
+
+                            <p class="font-semibold text-slate-700">
+                                Sem resultados para "<span class="text-indigo-600">{{ request('search') }}</span>"
+                            </p>
+
+                            <p class="mt-1 text-xs text-slate-400">
+                                Tenta pesquisar por outro termo.
+                            </p>
+
+                            <a href="{{ route('noticias.home') }}"
+                               class="mt-5 inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600">
+                                Ver todas
+                            </a>
+
+                        @else
+
+                            Nenhuma notícia registada.
+
+                        @endif
+
                     </div>
 
                 @endforelse
