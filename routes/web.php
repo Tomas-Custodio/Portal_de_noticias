@@ -59,8 +59,10 @@ use App\Http\Controllers\CategoriaController;
                         Route::get('/create', [CategoriaController::class, 'create'])->name('categoria.create');
                         Route::post('/create', [CategoriaController::class, 'save'])->name('categoria.save');
                         Route::get('/{id}/edit', [CategoriaController::class, 'edit_view'])->name('categoria.edit');
-                        Route::put('/{id}', [CategoriaController::class, 'update'])->name('categoria.update');
-                        Route::delete('/{id}', [CategoriaController::class, 'delete'])->name('categoria.delete');  
+                        Route::put('/{id}', [CategoriaController::class, 'update'])->name('categoria.update'); Route::post('/search', [CategoriaController::class, 'search'])->name('categorias.search'); 
+
+                        Route::delete('/{id}', [CategoriaController::class, 'delete'])->name('categoria.delete');
+                        
                         
                     });
                     
