@@ -42,7 +42,7 @@ use App\Http\Controllers\CategoriaController;
 
             Route::prefix('admin')->group(function () {
 
-                    Route::get('/', [UserController::class, 'index'])->name('users.home');
+                    Route::get('/users', [UserController::class, 'index'])->name('users.home');
                     Route::get('/list', [UserController::class, 'get_all'])->name('users.list_users');
 
                     Route::get('/create', [UserController::class, 'view'])->name('users.create');
