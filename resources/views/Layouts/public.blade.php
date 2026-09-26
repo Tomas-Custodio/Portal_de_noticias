@@ -158,30 +158,7 @@
 
             </form>
 
-        </div>
-
-
-        {{-- LINHA 2: FILTROS --}}
         
-        <div class="mx-auto flex max-w-7xl flex-col gap-4 border-t border-slate-100 px-6 py-3 md:flex-row md:items-center md:justify-end">
-
-            <section class="flex items-center justify-center gap-2">
-
-                <select name="filtro_data"
-                        class="rounded-md border-none p-1 outline outline-1 outline-slate-200 transition hover:bg-slate-100 focus:outline-blue-500">
-                    <option value="">Informações mais novas</option>
-                    <option value="old">Informações mais antigas</option>
-                </select>
-
-                <select name="filtro_categoria"
-                        class="rounded-md border-none p-1 outline outline-1 outline-slate-200 transition hover:bg-slate-100 focus:outline-blue-500">
-                    <option value="">Categorias</option>
-                    <option value="all">Todas</option>
-                </select>
-
-            </section>
-
-        </div>
 
     </header>
 
