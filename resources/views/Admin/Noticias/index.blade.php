@@ -320,8 +320,8 @@
 
                     {{-- PESQUISA --}}
                     <form
-                        action="{{ route('noticias.home') }}"
-                        method="GET"
+                        action="{{ route('noticias.search') }}"
+                        method="Post"
                         class="flex w-full items-center gap-2 sm:w-auto"
                     >
 
