@@ -100,7 +100,8 @@ use App\Http\Controllers\CategoriaController;
 
     Route::get('/register', [PublicController::class,'create'])->name('create');
     Route::post('/register', [PublicController::class,'save'])->name('save');
-
+    Route::get('/recentes', [PublicController::class, 'novas_noticias'])->name('noticias.recentes');
+    Route::get('/antigas', [PublicController::class, 'velhas_noticias'])->name('noticias.antigas');
     Route::get('/categorias', [PublicController::class, 'categorias'])->name('categorias');
     Route::get('/noticia_categoria/{id}', [PublicController::class, 'noticia_categoria'])->name('noticia_categoria');
 
