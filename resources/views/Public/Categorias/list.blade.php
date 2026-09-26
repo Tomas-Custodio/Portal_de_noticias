@@ -77,6 +77,7 @@
                     <article class="group flex flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl">
 
                         {{-- ÍCONE DA CATEGORIA --}}
+
                         <div class="flex items-center justify-between">
 
                             <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-xl font-black text-blue-600 transition duration-300 group-hover:bg-blue-600 group-hover:text-white">
@@ -101,7 +102,8 @@
 
 
                         {{-- CONTAGEM DE NOTÍCIAS --}}
-                        <div class="mt-4 flex items-center gap-2 text-xs font-medium text-slate-500">
+
+                        <div class="mt-4 flex items-center gap-2 text-xs font-medium text-slate-500 cursor-pointer hover:bg-600">
 
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M4 4h13a2 2 0 0 1 2 2v12a2 2 0 0 0 2 2H6a2 2 0 0 1-2-2z"/>
@@ -111,8 +113,7 @@
                                 <path d="M8 16h4"/>
                             </svg>
 
-                            {{ $categoria->noticias_count ?? 0 }}
-                            {{ ($categoria->noticias_count ?? 0) === 1 ? 'notícia' : 'notícias' }}
+                            {{ $categoria->noticias->count()}}
 
                         </div>
 
