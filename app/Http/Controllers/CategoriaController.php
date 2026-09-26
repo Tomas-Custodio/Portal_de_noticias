@@ -16,6 +16,27 @@ class CategoriaController extends Controller {
         return view('Admin/Categorias/index',compact('categorias','categorias_noticias','categorias_vazias','categorias_recentes'));
     }
 
+    /**
+ * Pesquisa categorias por nome.
+ */
+        public function search(Request $request){
+            
+            $termo = $request->input('search', '');
+
+            $resultado = null;
+
+            if (!empty($termo)) {
+
+                $resultado = Categoria::withCount('noticias')
+                    ->where('nome', 'like', "%{$termo}%")
+                    ->orderBy('nome', 'asc')
+                    ->paginate(15);
+
+            }
+
+            return view('Admin/Categorias/search', compact('termo', 'resultado'));
+        }
+
 
     # function that list all categories tho show in..... system views
 
