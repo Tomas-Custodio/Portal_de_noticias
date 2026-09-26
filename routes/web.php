@@ -75,6 +75,7 @@ use App\Http\Controllers\CategoriaController;
                         Route::post('/create', [NoticiaController::class, 'save'])->name('noticias.save');
                         Route::get('/{id}/edit', [NoticiaController::class, 'view_edit'])->name('noticias.edit');
                         Route::put('/{id}', [NoticiaController::class, 'save_edit'])->name('noticias.update');
+                        Route::post('/noticias/search', [NoticiaController::class, 'search'])->name('noticias.search');
                         Route::delete('/{id}', [NoticiaController::class, 'delete'])->name('noticias.delete'); 
 
                         Route::get('/rascunhos', [NoticiaController::class, 'rascunhos'])->name('noticias.rascunhos');

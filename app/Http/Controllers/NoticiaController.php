@@ -23,16 +23,28 @@ public function index(){
     return view('Admin/Noticias/index',compact('noticias','despublicadas','rascunhos','publicadas'));
 }
 
+/**
+ * Pesquisa notícias por título.
+ */
 public function search(Request $request)
 {
-    $termo = $request->input('search');
+    $termo = $request->input('search', '');
 
-    $resultados = Noticia::where('estado', 'aberto')
-        ->where('titulo', 'like', "%{$termo}%")
-        ->paginate(10);
+    $resultado = null;
 
-    return view('Admin/Noticias/search', compact('resultados', 'termo'));
+    if (!empty($termo)) {
+
+        $resultado = Noticia::with(['categoria', 'usuario'])
+            ->where('titulo', 'like', "%{$termo}%")
+            ->orderBy('data', 'desc')
+            ->paginate(15);
+
+    }
+
+    return view('Admin.Noticias.search', compact('termo', 'resultado'));
 }
+
+
 
 
 public function  detalhes ( string $slug ){
