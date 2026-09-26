@@ -21,6 +21,24 @@ class UserController extends Controller
 
     }
 
+    /**
+ * Pesquisa utilizadores por nome ou email.
+ */
+    public function search(Request $request){
+
+        $termo = $request->input('search');
+
+        if  ( !empty($termo) ) {
+
+            $resultado = User::Where('nome', 'like', "%{$termo}%")
+                            ->orWhere('name', 'like', "%{$termo}%")
+                            ->orWhere('email', 'like', "%{$termo}%")->paginate(15);
+
+            return view('Admin/Users/search', compact('usuarios','termo','administradores','editores')); };
+            
+        }
+
+
     # function to show the form to create a new user
 
     public function view() {
