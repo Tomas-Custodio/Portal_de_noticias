@@ -57,7 +57,7 @@
         ========================================================== --}}
         <form
             action="{{ route('users.search') }}"
-            method="GET"
+            method="Post"
             class="mb-8 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5"
         >
 
@@ -75,7 +75,7 @@
                     <input
                         type="text"
                         name="search"
-                        value="{{ $termo ?? '' }}"
+                        value="{{ $termo }}"
                         placeholder="Pesquisar por nome ou email..."
                         autocomplete="off"
                         autofocus
@@ -125,20 +125,7 @@
                 </div>
 
 
-                @if($resultado->total() > 0)
-
-                    <a
-                        href="{{ route('users.search') }}"
-                        class="inline-flex w-fit items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-500 transition hover:border-red-200 hover:bg-red-50 hover:text-red-600"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M18 6 6 18"/>
-                            <path d="m6 6 12 12"/>
-                        </svg>
-                        Limpar
-                    </a>
-
-                @endif
+              
 
             </div>
 
