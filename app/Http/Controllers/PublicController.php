@@ -59,7 +59,7 @@ class PublicController extends Controller {
     public function velhas_noticias() {
 
         $velhas_noticias = Noticia::where('estado','Publicado')->orderBy('data', 'desc')->paginate(10);
-        return view('Public.Noticias.velhas', compact('velhas_noticias'));
+        return view('Public.Noticias.antigas', compact('velhas_noticias'));
 
     }
 
