@@ -40,7 +40,7 @@
                         <path d="M5 9.5V21h14V9.5"/>
                         <path d="M9 21v-6h6v6"/>
                     </svg>
-                    Home
+                    inicio
                     <span class="absolute -bottom-1 left-0 h-0.5 w-full origin-left scale-x-100 rounded-full bg-blue-600 transition"></span>
                 </a>
 
@@ -81,7 +81,7 @@
                             <path d="m10 17 5-5-5-5"/>
                             <path d="M15 12H3"/>
                         </svg>
-                        Login
+                        Entrar
                     </a>
                 @endguest
 
@@ -94,7 +94,7 @@
                             <path d="m10 17 5-5-5-5"/>
                             <path d="M15 12H3"/>
                         </svg>
-                        Register
+                        Cadastrar
                     </a>
                 @endguest
 
@@ -111,7 +111,7 @@
                                 <path d="m16 17 5-5-5-5"/>
                                 <path d="M21 12H9"/>
                             </svg>
-                            Logout
+                            Sair
                         </button>
                     </form>
 
