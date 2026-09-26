@@ -282,9 +282,10 @@
 
 
                     {{-- PESQUISA --}}
+
                     <form
-                        action="{{ route('users.home') }}"
-                        method="GET"
+                        action="{{ route('users.search') }}"
+                        method="Post"
                         class="flex w-full items-center gap-2 sm:w-auto"
                     >
 

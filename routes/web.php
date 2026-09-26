@@ -48,7 +48,7 @@ use App\Http\Controllers\CategoriaController;
                     Route::get('/create', [UserController::class, 'view'])->name('users.create');
                     Route::post('/create', [UserController::class, 'save'])->name('users.save');
                     Route::delete('/{id}', [UserController::class, 'delete'])->name('users.delete');
-                    Route::get('/users/search', [UserController::class, 'search'])->name('users.search');
+                    Route::Post('/users/search', [UserController::class, 'search'])->name('users.search');
 
                 
                     Route::prefix('categorias')->group(function () {
