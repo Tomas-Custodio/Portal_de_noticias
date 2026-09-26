@@ -34,7 +34,7 @@ class PublicController extends Controller {
 
      public function categorias() {
 
-        $list_categories = Categoria::paginate(10);
+        $list_categories = Categoria::wherehas('noticias')->paginate(10);
         return view('Public/Categorias/list',compact('list_categories'));
     }
 
