@@ -14,7 +14,7 @@ class NoticiaController extends Controller
      
 public function index(){
 
-    $noticias = Noticia::all();
+    $noticias = Noticia::paginate(10);
 
     $rascunhos = Noticia::where('estado','Rascunho')->count();
     $despublicadas = Noticia::where('estado','Despublicado')->count();
