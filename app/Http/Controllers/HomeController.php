@@ -16,7 +16,7 @@ class HomeController extends Controller {
 
     public function Home(){
 
-        $noticias= Noticia::where('estado',"Publicado")->orderby('data','asc')->paginate(10);
+        $noticias= Noticia::where('estado',"Publicado")->orderby('data','asc')->take(5)->get();
 
         return view('Public.index',compact('noticias'));
     }
