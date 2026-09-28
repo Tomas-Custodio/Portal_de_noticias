@@ -81,9 +81,9 @@
 
             </div>
 
-            <a href="{{ route('noticias.list') }}"
+            <a href="{{ route('noticias') }}"
                class="group inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 transition hover:text-blue-700">
-                Ver todas
+                Ver mais
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M5 12h14"/>
                     <path d="m13 6 6 6-6 6"/>
@@ -158,10 +158,7 @@
         </div>
 
 
-        {{-- PAGINAÇÃO --}}
-        <div class="mt-12">
-            {{ $noticias->links() }}
-        </div>
+      
 
     </section>
 
