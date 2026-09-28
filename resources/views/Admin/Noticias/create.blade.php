@@ -53,7 +53,7 @@
 
                 </div>
 
-                <a href="{{ route('noticias.list') }}"
+                <a href="{{ route('noticias.home') }}"
                    class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50">
 
                     <svg class="h-5 w-5"

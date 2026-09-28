@@ -63,7 +63,7 @@
 
 
             <a
-                href="{{ route('users.list_users') }}"
+                href="{{ route('users.home') }}"
                 class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-600 shadow-sm transition hover:bg-slate-50"
             >
                 ← Ver usuários
