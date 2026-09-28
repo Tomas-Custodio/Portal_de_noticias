@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+
 use App\Models\User;
+use App\Models\Categoria;
+use App\Models\Noticia;
 
 class UserController extends Controller
 {
@@ -21,6 +24,46 @@ class UserController extends Controller
 
     }
 
+     public function dashborad() {
+
+        // ============ ESTATÍSTICAS GERAIS ============
+
+        # Notícias &  Categorias Utilizadores
+
+        $total_noticias    = Noticia::count();
+        $total_categorias = Categoria::count();
+        $total_users = User::count();
+
+        $noticias_publicadas = Noticia::where('estado', 'Publicado')->count();
+        $noticias_rascunhos = Noticia::where('estado', 'Rascunho')->count();
+
+        $noticias_mes = Noticia::whereMonth('created_at', now()->month)
+        ->whereYear('created_at', now()->year)->count();
+
+        // ============ LISTAS ============
+
+        // Últimas 5 notícias publicadas
+        $ultimas_noticias = Noticia::with(['categoria', 'usuario'])->where('estado', 'Publicado')->orderBy('data', 'desc')->take(5)->get();
+
+        // Últimos 5 utilizadores registados
+        $ultimos_users = User::orderBy('created_at', 'desc')->take(5)->get();
+
+        // Top 5 categorias com mais notícias
+        $top_categorias = Categoria::withCount('noticias')->orderBy('noticias_count', 'desc')->take(5)->get();
+      
+        return view('Admin.dashboard', compact(
+            'total_noticias',
+            'noticias_publicadas',
+            'noticias_rascunhos',
+            'noticias_mes',
+            'total_categorias',
+            'total_users',
+            'ultimas_noticias',
+            'ultimos_users',
+            'top_categorias',
+        ));
+    }
+
     /**
  * Pesquisa utilizadores por nome ou email.
  */
@@ -30,13 +73,10 @@ class UserController extends Controller
 
         if  ( !empty($termo) ) {
 
-            $resultado = User::Where('nome', 'like', "%{$termo}%")
-                            ->orWhere('email', 'like', "%{$termo}%")->paginate(15);
-
+            $resultado = User::Where('nome', 'like', "%{$termo}%")->orWhere('email', 'like', "%{$termo}%")->paginate(15);
             return view('Admin/Entidades/search', compact('termo','resultado')); };
             
         }
-
 
     # function to show the form to create a new user
 
