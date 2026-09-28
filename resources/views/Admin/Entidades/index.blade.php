@@ -140,7 +140,7 @@
                 {{-- PESQUISA --}}
                 <form
                     action="{{ route('users.search') }}"
-                    method="GET"
+                    method="Post"
                     class="flex w-full items-center gap-2 sm:w-auto"
                 >
 
