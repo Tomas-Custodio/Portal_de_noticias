@@ -86,7 +86,10 @@ class UserController extends Controller
 
         if  ( !empty($termo) ) {
 
-            $resultado = User::Where('nome', 'like', "%{$termo}%")->orWhere('email', 'like', "%{$termo}%")->paginate(15);
+            $resultado = User::Where('nome', 'like', "%{$termo}%")
+            ->orWhere('email', 'like', "%{$termo}%")
+            ->orWhere('role', 'like', "%{$termo}%")->paginate(15);
+
             return view('Admin/Entidades/search', compact('termo','resultado')); };
             
         }
