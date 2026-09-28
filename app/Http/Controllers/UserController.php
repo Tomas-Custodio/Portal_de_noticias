@@ -34,8 +34,15 @@ class UserController extends Controller
         $total_categorias = Categoria::count();
         $total_users = User::count();
 
-        $noticias_publicadas = Noticia::where('estado', 'Publicado')->count();
-        $noticias_rascunhos = Noticia::where('estado', 'Rascunho')->count();
+        $publicadas = Noticia::where('estado', 'Publicado')->count();
+        $rascunhos = Noticia::where('estado', 'Rascunho')->count();
+        $despublicadas = Noticia::where('estado', 'Despublicado')->count();
+        $categoria_noticias = Categoria::wherehas('noticias')->count();
+        $categoria_semnoticias = Categoria::whereDoesnthave('noticias')->count();
+
+        $admins = User::where('role','admin')->count();
+        $editor = User::where('role','editor')->count();
+        $users = User::where('role','user')->count();
 
         $noticias_mes = Noticia::whereMonth('created_at', now()->month)
         ->whereYear('created_at', now()->year)->count();
@@ -53,11 +60,17 @@ class UserController extends Controller
       
         return view('Admin.dashboard', compact(
             'total_noticias',
-            'noticias_publicadas',
-            'noticias_rascunhos',
+            'categoria_noticias',
+            'categoria_semnoticias',
+            'publicadas',
+            'despublicadas',
+            'rascunhos',
             'noticias_mes',
             'total_categorias',
             'total_users',
+            'admins',
+            'editor',
+            'users',
             'ultimas_noticias',
             'ultimos_users',
             'top_categorias',
