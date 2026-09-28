@@ -126,7 +126,7 @@ class UserController extends Controller
 
 
         return redirect()
-            ->route('users.list_users')
+            ->route('users.home')
             ->with(
                 'msg',
                 'Usuário ' . $created_user->name . ' criado com êxito!'

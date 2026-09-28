@@ -25,7 +25,7 @@ class AuthController extends Controller
 
             if (Auth::user()->role === 'admin') {
 
-                return redirect()->route('users.home')->with('msg', 'Logado no sistema');
+                return redirect()->route('users.dashboard')->with('msg', 'Logado no sistema');
             }
 
             else{
