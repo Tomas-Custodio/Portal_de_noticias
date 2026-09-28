@@ -5,9 +5,10 @@
 
 @section('conteudo')
 
-<div class="mx-auto max-w-7xl px-4 pb-12 sm:px-6 sm:pb-16">
+<div class="mx-auto max-w-7xl px-4 py-6 pb-12 sm:px-6 sm:pb-16">
 
     {{-- ==================== HEADER ==================== --}}
+
     <div class="mb-8 sm:mb-10">
         <div class="mb-4 flex flex-wrap items-center gap-2 text-xs text-slate-400 sm:mb-5 sm:text-sm">
             <span class="font-medium">Administração</span>
@@ -65,32 +66,32 @@
     </div>
 
 
-    {{-- ==================== NOTÍCIAS ==================== --}}
+    {{-- ==================== TOTAIS ==================== --}}
     <div class="mb-4 flex items-center gap-3 sm:mb-5">
         <div class="flex h-8 w-8 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                <path d="M4 4h13a2 2 0 0 1 2 2v12a2 2 0 0 0 2 2H6a2 2 0 0 1-2-2z"/>
-                <path d="M19 6h1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2"/>
+                <path d="M3 3v18h18"/>
+                <path d="m19 9-5 5-4-4-3 3"/>
             </svg>
         </div>
         <div>
-            <h2 class="text-sm font-bold text-slate-900 sm:text-base">Notícias</h2>
-            <p class="text-xs text-slate-500">Estado das notícias no portal</p>
+            <h2 class="text-sm font-bold text-slate-900 sm:text-base">Totais</h2>
+            <p class="text-xs text-slate-500">Resumo geral do sistema</p>
         </div>
     </div>
 
-    <div class="mb-6 grid gap-3 sm:mb-8 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
+    <div class="mb-8 grid gap-3 sm:mb-10 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
 
-        {{-- TOTAL DE NOTÍCIAS --}}
-        <a href="{{ route('noticias.home') }}" class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-md sm:rounded-3xl sm:p-6">
+        {{-- TOTAL NOTÍCIAS --}}
+        <a href="{{ route('noticias.home') }}" class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-md sm:rounded-3xl sm:p-6">
             <div class="flex items-center justify-between gap-3">
                 <div class="min-w-0">
                     <p class="truncate text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Total de notícias</p>
-                    <p class="mt-1 text-2xl font-bold tracking-tight text-slate-950 sm:mt-2 sm:text-3xl">{{ $total_noticias }}</p>
+                    <p class="mt-1 text-3xl font-bold tracking-tight text-slate-950 sm:mt-2 sm:text-4xl">{{ $total_noticias }}</p>
                     <p class="mt-0.5 text-[10px] text-slate-400 sm:mt-1 sm:text-xs">{{ $noticias_mes }} este mês</p>
                 </div>
-                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 transition group-hover:bg-indigo-600 group-hover:text-white sm:h-12 sm:w-12 sm:rounded-2xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 transition duration-300 group-hover:bg-indigo-600 group-hover:text-white group-hover:scale-105 sm:h-14 sm:w-14 sm:rounded-2xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M4 4h13a2 2 0 0 1 2 2v12a2 2 0 0 0 2 2H6a2 2 0 0 1-2-2z"/>
                     </svg>
                 </div>
@@ -98,86 +99,16 @@
         </a>
 
 
-        {{-- PUBLICADAS --}}
-        <div class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:rounded-3xl sm:p-6">
-            <div class="flex items-center justify-between gap-3">
-                <div class="min-w-0">
-                    <p class="truncate text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Notícias publicadas</p>
-                    <p class="mt-1 text-2xl font-bold tracking-tight text-slate-950 sm:mt-2 sm:text-3xl">{{ $publicadas ?? 0 }}</p>
-                    <p class="mt-0.5 text-[10px] text-slate-400 sm:mt-1 sm:text-xs">visíveis no portal</p>
-                </div>
-                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 sm:h-12 sm:w-12 sm:rounded-2xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M20 6 9 17l-5-5"/>
-                    </svg>
-                </div>
-            </div>
-        </div>
-
-
-        {{-- DESPUBLICADAS --}}
-        <a href="{{ route('noticias.despublicados') }}" class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md sm:rounded-3xl sm:p-6">
-            <div class="flex items-center justify-between gap-3">
-                <div class="min-w-0">
-                    <p class="truncate text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Notícias despublicadas</p>
-                    <p class="mt-1 text-2xl font-bold tracking-tight text-slate-950 sm:mt-2 sm:text-3xl">{{ $despublicadas ?? 0 }}</p>
-                    <p class="mt-0.5 text-[10px] text-slate-400 sm:mt-1 sm:text-xs">retiradas do portal</p>
-                </div>
-                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-50 text-red-600 sm:h-12 sm:w-12 sm:rounded-2xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/>
-                        <line x1="2" x2="22" y1="2" y2="22"/>
-                    </svg>
-                </div>
-            </div>
-        </a>
-
-
-        {{-- RASCUNHOS --}}
-        <a href="{{ route('noticias.rascunhos') }}" class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-amber-200 hover:shadow-md sm:rounded-3xl sm:p-6">
-            <div class="flex items-center justify-between gap-3">
-                <div class="min-w-0">
-                    <p class="truncate text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Notícias em rascunho</p>
-                    <p class="mt-1 text-2xl font-bold tracking-tight text-slate-950 sm:mt-2 sm:text-3xl">{{ $rascunhos ?? 0 }}</p>
-                    <p class="mt-0.5 text-[10px] text-slate-400 sm:mt-1 sm:text-xs">por publicar</p>
-                </div>
-                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-50 text-amber-600 sm:h-12 sm:w-12 sm:rounded-2xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 20h9"/>
-                        <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/>
-                    </svg>
-                </div>
-            </div>
-        </a>
-    </div>
-
-
-    {{-- ==================== CATEGORIAS ==================== --}}
-    <div class="mb-4 flex items-center gap-3 sm:mb-5">
-        <div class="flex h-8 w-8 items-center justify-center rounded-xl bg-slate-100 text-slate-600">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                <path d="M3 6a2 2 0 0 1 2-2h3l2 2h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-            </svg>
-        </div>
-        <div>
-            <h2 class="text-sm font-bold text-slate-900 sm:text-base">Categorias</h2>
-            <p class="text-xs text-slate-500">Organização das notícias</p>
-        </div>
-    </div>
-
-    <div class="mb-6 grid gap-3 sm:mb-8 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
-
-        {{-- TOTAL DE CATEGORIAS --}}
-        <a href="{{ route('categorias.home') }}"
-           class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md sm:rounded-3xl sm:p-6">
+        {{-- TOTAL CATEGORIAS --}}
+        <a href="{{ route('categorias.home') }}" class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md sm:rounded-3xl sm:p-6">
             <div class="flex items-center justify-between gap-3">
                 <div class="min-w-0">
                     <p class="truncate text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Total de categorias</p>
-                    <p class="mt-1 text-2xl font-bold tracking-tight text-slate-950 sm:mt-2 sm:text-3xl">{{ $total_categorias }}</p>
+                    <p class="mt-1 text-3xl font-bold tracking-tight text-slate-950 sm:mt-2 sm:text-4xl">{{ $total_categorias }}</p>
                     <p class="mt-0.5 text-[10px] text-slate-400 sm:mt-1 sm:text-xs">no sistema</p>
                 </div>
-                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-600 transition group-hover:bg-slate-800 group-hover:text-white sm:h-12 sm:w-12 sm:rounded-2xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-600 transition duration-300 group-hover:bg-slate-800 group-hover:text-white group-hover:scale-105 sm:h-14 sm:w-14 sm:rounded-2xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M3 6a2 2 0 0 1 2-2h3l2 2h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                     </svg>
                 </div>
@@ -185,127 +116,226 @@
         </a>
 
 
-        {{-- ✅ CATEGORIAS COM NOTÍCIAS — nome correto: $categoria_noticias --}}
-        <div class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:rounded-3xl sm:p-6">
-            <div class="flex items-center justify-between gap-3">
-                <div class="min-w-0">
-                    <p class="truncate text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Categorias com notícias</p>
-                    <p class="mt-1 text-2xl font-bold tracking-tight text-slate-950 sm:mt-2 sm:text-3xl">{{ $categoria_noticias ?? 0 }}</p>
-                    <p class="mt-0.5 text-[10px] text-slate-400 sm:mt-1 sm:text-xs">em uso</p>
-                </div>
-                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 sm:h-12 sm:w-12 sm:rounded-2xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M20 6 9 17l-5-5"/>
-                    </svg>
-                </div>
-            </div>
-        </div>
-
-
-        {{-- ✅ CATEGORIAS SEM NOTÍCIAS — nome correto: $categoria_semnoticias --}}
-        <div class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:rounded-3xl sm:p-6">
-            <div class="flex items-center justify-between gap-3">
-                <div class="min-w-0">
-                    <p class="truncate text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Categorias sem notícias</p>
-                    <p class="mt-1 text-2xl font-bold tracking-tight text-slate-950 sm:mt-2 sm:text-3xl">{{ $categoria_semnoticias ?? 0 }}</p>
-                    <p class="mt-0.5 text-[10px] text-slate-400 sm:mt-1 sm:text-xs">vazias</p>
-                </div>
-                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-400 sm:h-12 sm:w-12 sm:rounded-2xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 20h9"/>
-                        <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/>
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    {{-- ==================== UTILIZADORES ==================== --}}
-    <div class="mb-4 flex items-center gap-3 sm:mb-5">
-        <div class="flex h-8 w-8 items-center justify-center rounded-xl bg-purple-50 text-purple-600">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-            </svg>
-        </div>
-        <div>
-            <h2 class="text-sm font-bold text-slate-900 sm:text-base">Utilizadores</h2>
-            <p class="text-xs text-slate-500">Acessos ao sistema</p>
-        </div>
-    </div>
-
-    <div class="mb-6 grid gap-3 sm:mb-8 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
-
         {{-- TOTAL USERS --}}
-        <a href="{{ route('users.home') }}"
-           class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-purple-200 hover:shadow-md sm:rounded-3xl sm:p-6">
+        <a href="{{ route('users.home') }}" class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-purple-200 hover:shadow-md sm:rounded-3xl sm:p-6">
             <div class="flex items-center justify-between gap-3">
                 <div class="min-w-0">
                     <p class="truncate text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Total de utilizadores</p>
-                    <p class="mt-1 text-2xl font-bold tracking-tight text-slate-950 sm:mt-2 sm:text-3xl">{{ $total_users }}</p>
+                    <p class="mt-1 text-3xl font-bold tracking-tight text-slate-950 sm:mt-2 sm:text-4xl">{{ $total_users }}</p>
                     <p class="mt-0.5 text-[10px] text-slate-400 sm:mt-1 sm:text-xs">registados</p>
                 </div>
-                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-purple-50 text-purple-600 transition group-hover:bg-purple-600 group-hover:text-white sm:h-12 sm:w-12 sm:rounded-2xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-purple-50 text-purple-600 transition duration-300 group-hover:bg-purple-600 group-hover:text-white group-hover:scale-105 sm:h-14 sm:w-14 sm:rounded-2xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
                         <circle cx="9" cy="7" r="4"/>
                     </svg>
                 </div>
             </div>
         </a>
+    </div>
 
 
-        {{-- ADMINS --}}
-        <div class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:rounded-3xl sm:p-6">
-            <div class="flex items-center justify-between gap-3">
-                <div class="min-w-0">
-                    <p class="truncate text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Administradores</p>
-                    <p class="mt-1 text-2xl font-bold tracking-tight text-slate-950 sm:mt-2 sm:text-3xl">{{ $admins ?? 0 }}</p>
-                    <p class="mt-0.5 text-[10px] text-slate-400 sm:mt-1 sm:text-xs">acesso total</p>
-                </div>
-                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-rose-50 text-rose-600 sm:h-12 sm:w-12 sm:rounded-2xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6z"/>
+    {{-- ==================== DETALHES ==================== --}}
+    <div class="mb-4 flex items-center gap-3 sm:mb-5">
+        <div class="flex h-8 w-8 items-center justify-center rounded-xl bg-slate-100 text-slate-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 8v8"/>
+                <path d="M8 12h8"/>
+            </svg>
+        </div>
+        <div>
+            <h2 class="text-sm font-bold text-slate-900 sm:text-base">Detalhes</h2>
+            <p class="text-xs text-slate-500">Detalhes por tipo de entidade</p>
+        </div>
+    </div>
+
+
+    <div class="mb-8 space-y-6 sm:mb-10">
+
+        {{-- ===== DETALHES — UTILIZADORES ===== --}}
+        <div>
+            <div class="mb-3 flex items-center gap-2 sm:mb-4">
+                <span class="flex h-6 w-6 items-center justify-center rounded-lg bg-purple-50 text-purple-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
                     </svg>
+                </span>
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 sm:text-sm">
+                    Utilizadores
+                </h3>
+            </div>
+
+            <div class="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
+
+                {{-- ADMINS --}}
+                <div class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-rose-200 hover:shadow-md sm:rounded-3xl sm:p-6">
+                    <div class="flex items-center justify-between gap-3">
+                        <div class="min-w-0">
+                            <p class="truncate text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Administradores</p>
+                            <p class="mt-1 text-2xl font-bold tracking-tight text-slate-950 sm:mt-2 sm:text-3xl">{{ $admins ?? 0 }}</p>
+                            <p class="mt-0.5 text-[10px] text-slate-400 sm:mt-1 sm:text-xs">acesso total</p>
+                        </div>
+                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-rose-50 text-rose-600 transition duration-300 group-hover:bg-rose-600 group-hover:text-white group-hover:scale-105 sm:h-12 sm:w-12 sm:rounded-2xl">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- EDITORES --}}
+                <div class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-sky-200 hover:shadow-md sm:rounded-3xl sm:p-6">
+                    <div class="flex items-center justify-between gap-3">
+                        <div class="min-w-0">
+                            <p class="truncate text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Editores</p>
+                            <p class="mt-1 text-2xl font-bold tracking-tight text-slate-950 sm:mt-2 sm:text-3xl">{{ $editor ?? 0 }}</p>
+                            <p class="mt-0.5 text-[10px] text-slate-400 sm:mt-1 sm:text-xs">criam e editam</p>
+                        </div>
+                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sky-50 text-sky-600 transition duration-300 group-hover:bg-sky-600 group-hover:text-white group-hover:scale-105 sm:h-12 sm:w-12 sm:rounded-2xl">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 20h9"/>
+                                <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- USERS NORMAIS --}}
+                <div class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-teal-200 hover:shadow-md sm:rounded-3xl sm:p-6">
+                    <div class="flex items-center justify-between gap-3">
+                        <div class="min-w-0">
+                            <p class="truncate text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Utilizadores normais</p>
+                            <p class="mt-1 text-2xl font-bold tracking-tight text-slate-950 sm:mt-2 sm:text-3xl">{{ $users ?? 0 }}</p>
+                            <p class="mt-0.5 text-[10px] text-slate-400 sm:mt-1 sm:text-xs">acesso limitado</p>
+                        </div>
+                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal-50 text-teal-600 transition duration-300 group-hover:bg-teal-600 group-hover:text-white group-hover:scale-105 sm:h-12 sm:w-12 sm:rounded-2xl">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
 
-        {{-- EDITORES --}}
-        <div class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:rounded-3xl sm:p-6">
-            <div class="flex items-center justify-between gap-3">
-                <div class="min-w-0">
-                    <p class="truncate text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Editores</p>
-                    <p class="mt-1 text-2xl font-bold tracking-tight text-slate-950 sm:mt-2 sm:text-3xl">{{ $editor ?? 0 }}</p>
-                    <p class="mt-0.5 text-[10px] text-slate-400 sm:mt-1 sm:text-xs">criam e editam</p>
-                </div>
-                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sky-50 text-sky-600 sm:h-12 sm:w-12 sm:rounded-2xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 20h9"/>
-                        <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/>
+        {{-- ===== DETALHES — NOTÍCIAS ===== --}}
+        <div>
+            <div class="mb-3 flex items-center gap-2 sm:mb-4">
+                <span class="flex h-6 w-6 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <path d="M4 4h13a2 2 0 0 1 2 2v12a2 2 0 0 0 2 2H6a2 2 0 0 1-2-2z"/>
                     </svg>
+                </span>
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 sm:text-sm">
+                    Notícias
+                </h3>
+            </div>
+
+            <div class="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
+
+                {{-- PUBLICADAS --}}
+                <div class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-md sm:rounded-3xl sm:p-6">
+                    <div class="flex items-center justify-between gap-3">
+                        <div class="min-w-0">
+                            <p class="truncate text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Notícias publicadas</p>
+                            <p class="mt-1 text-2xl font-bold tracking-tight text-slate-950 sm:mt-2 sm:text-3xl">{{ $publicadas ?? 0 }}</p>
+                            <p class="mt-0.5 text-[10px] text-slate-400 sm:mt-1 sm:text-xs">visíveis no portal</p>
+                        </div>
+                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 transition duration-300 group-hover:bg-emerald-600 group-hover:text-white group-hover:scale-105 sm:h-12 sm:w-12 sm:rounded-2xl">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 6 9 17l-5-5"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- DESPUBLICADAS --}}
+                <div class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-red-200 hover:shadow-md sm:rounded-3xl sm:p-6">
+                    <div class="flex items-center justify-between gap-3">
+                        <div class="min-w-0">
+                            <p class="truncate text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Notícias despublicadas</p>
+                            <p class="mt-1 text-2xl font-bold tracking-tight text-slate-950 sm:mt-2 sm:text-3xl">{{ $despublicadas ?? 0 }}</p>
+                            <p class="mt-0.5 text-[10px] text-slate-400 sm:mt-1 sm:text-xs">retiradas do portal</p>
+                        </div>
+                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-50 text-red-600 transition duration-300 group-hover:bg-red-500 group-hover:text-white group-hover:scale-105 sm:h-12 sm:w-12 sm:rounded-2xl">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/>
+                                <line x1="2" x2="22" y1="2" y2="22"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- RASCUNHOS --}}
+                <div class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-amber-200 hover:shadow-md sm:rounded-3xl sm:p-6">
+                    <div class="flex items-center justify-between gap-3">
+                        <div class="min-w-0">
+                            <p class="truncate text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Notícias em rascunho</p>
+                            <p class="mt-1 text-2xl font-bold tracking-tight text-slate-950 sm:mt-2 sm:text-3xl">{{ $rascunhos ?? 0 }}</p>
+                            <p class="mt-0.5 text-[10px] text-slate-400 sm:mt-1 sm:text-xs">por publicar</p>
+                        </div>
+                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-50 text-amber-600 transition duration-300 group-hover:bg-amber-500 group-hover:text-white group-hover:scale-105 sm:h-12 sm:w-12 sm:rounded-2xl">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 20h9"/>
+                                <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
 
-        {{-- USERS NORMAIS --}}
-        <div class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:rounded-3xl sm:p-6">
-            <div class="flex items-center justify-between gap-3">
-                <div class="min-w-0">
-                    <p class="truncate text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Utilizadores normais</p>
-                    <p class="mt-1 text-2xl font-bold tracking-tight text-slate-950 sm:mt-2 sm:text-3xl">{{ $users ?? 0 }}</p>
-                    <p class="mt-0.5 text-[10px] text-slate-400 sm:mt-1 sm:text-xs">acesso limitado</p>
-                </div>
-                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal-50 text-teal-600 sm:h-12 sm:w-12 sm:rounded-2xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                        <circle cx="12" cy="7" r="4"/>
+        {{-- ===== DETALHES — CATEGORIAS ===== --}}
+        <div>
+            <div class="mb-3 flex items-center gap-2 sm:mb-4">
+                <span class="flex h-6 w-6 items-center justify-center rounded-lg bg-slate-100 text-slate-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <path d="M3 6a2 2 0 0 1 2-2h3l2 2h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                     </svg>
+                </span>
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 sm:text-sm">
+                    Categorias
+                </h3>
+            </div>
+
+            <div class="grid gap-3 sm:grid-cols-2 sm:gap-4">
+
+                {{-- COM NOTÍCIAS --}}
+                <div class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-md sm:rounded-3xl sm:p-6">
+                    <div class="flex items-center justify-between gap-3">
+                        <div class="min-w-0">
+                            <p class="truncate text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Categorias com notícias</p>
+                            <p class="mt-1 text-2xl font-bold tracking-tight text-slate-950 sm:mt-2 sm:text-3xl">{{ $categoria_noticias ?? 0 }}</p>
+                            <p class="mt-0.5 text-[10px] text-slate-400 sm:mt-1 sm:text-xs">em uso</p>
+                        </div>
+                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 transition duration-300 group-hover:bg-emerald-600 group-hover:text-white group-hover:scale-105 sm:h-12 sm:w-12 sm:rounded-2xl">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 6 9 17l-5-5"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- SEM NOTÍCIAS --}}
+                <div class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md sm:rounded-3xl sm:p-6">
+                    <div class="flex items-center justify-between gap-3">
+                        <div class="min-w-0">
+                            <p class="truncate text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Categorias sem notícias</p>
+                            <p class="mt-1 text-2xl font-bold tracking-tight text-slate-950 sm:mt-2 sm:text-3xl">{{ $categoria_semnoticias ?? 0 }}</p>
+                            <p class="mt-0.5 text-[10px] text-slate-400 sm:mt-1 sm:text-xs">vazias</p>
+                        </div>
+                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-400 transition duration-300 group-hover:bg-slate-700 group-hover:text-white group-hover:scale-105 sm:h-12 sm:w-12 sm:rounded-2xl">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 20h9"/>
+                                <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -389,8 +419,12 @@
                                     {{ strtoupper(substr($user->nome ?? $user->name ?? '?', 0, 1)) }}
                                 </div>
                                 <div class="min-w-0 flex-1">
-                                    <p class="truncate text-xs font-semibold text-slate-800 sm:text-sm">{{ $user->nome ?? $user->name ?? 'Sem nome' }}</p>
-                                    <p class="truncate text-[10px] text-slate-400 sm:text-xs">{{ $user->email }}</p>
+                                    <p class="truncate text-xs font-semibold text-slate-800 sm:text-sm">
+                                        {{ $user->nome ?? $user->name ?? 'Sem nome' }}
+                                    </p>
+                                    <p class="truncate text-[10px] text-slate-400 sm:text-xs">
+                                        {{ $user->email }}
+                                    </p>
                                 </div>
                                 <a href="{{ route('users.edit', $user->id) }}" class="shrink-0 text-[10px] font-semibold text-indigo-600 sm:text-xs">Editar</a>
                             </div>
