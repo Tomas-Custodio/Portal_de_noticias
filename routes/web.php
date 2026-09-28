@@ -44,6 +44,7 @@ use App\Http\Controllers\CategoriaController;
 
                     Route::get('/users', [UserController::class, 'index'])->name('users.home');
                     Route::get('/list', [UserController::class, 'get_all'])->name('users.list_users');
+                    Route::get('/dashboard', [UserController::class, 'dashborad'])->name('users.dashboard');
 
                     Route::get('/create', [UserController::class, 'view'])->name('users.create');
                     Route::post('/create', [UserController::class, 'save'])->name('users.save');
