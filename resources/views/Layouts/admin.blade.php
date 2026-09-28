@@ -78,7 +78,7 @@
 
                 {{-- DASHBOARD --}}
                 <a
-                    href=""
+                    href="{{ route('users.dashboard') }}"
                     class="group relative flex items-center gap-4 rounded-2xl px-4 py-3 text-sm font-medium text-slate-600 transition-all duration-300 hover:bg-indigo-50 hover:text-indigo-600 hover:shadow-sm focus:bg-indigo-50 focus:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/30
                         {{ request()->routeIs('dashboard') ? 'bg-indigo-50 font-semibold text-indigo-600 shadow-sm' : '' }}"
                 >
