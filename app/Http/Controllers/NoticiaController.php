@@ -32,16 +32,47 @@ public function search(Request $request)
 
     $resultado = null;
 
-    if (!empty($termo)) {
+
+       
+
+    
+
+        
+
+
+
+       
+
+if (!empty($termo)) {
+
+    $categoria = Categoria::where('nome', 'like', "%{$termo}%")->first();
+
+    if ($categoria) {
+
+        $resultado = Noticia::with(['categoria', 'usuario'])
+            ->where('categoria_id', $categoria->id)
+            ->orderBy('data', 'desc')
+            ->paginate(15);
+
+        return view('Admin.Noticias.search', compact('termo', 'resultado'));
+    }
+
+    $noticias = Noticia::with(['categoria', 'usuario'])
+        ->where('titulo', 'like', "%{$termo}%")
+        ->first();
+
+    if ($noticias) {
 
         $resultado = Noticia::with(['categoria', 'usuario'])
             ->where('titulo', 'like', "%{$termo}%")
             ->orderBy('data', 'desc')
             ->paginate(15);
 
+        return view('Admin.Noticias.search', compact('termo', 'resultado'));
     }
+}
 
-    return view('Admin.Noticias.search', compact('termo', 'resultado'));
+  
 }
 
 
