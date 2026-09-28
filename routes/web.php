@@ -43,7 +43,6 @@ use App\Http\Controllers\CategoriaController;
             Route::prefix('admin')->group(function () {
 
                     Route::get('/users', [UserController::class, 'index'])->name('users.home');
-                    Route::get('/list', [UserController::class, 'get_all'])->name('users.list_users');
                     Route::get('/dashboard', [UserController::class, 'dashborad'])->name('users.dashboard');
 
                     Route::get('/create', [UserController::class, 'view'])->name('users.create');
@@ -55,8 +54,6 @@ use App\Http\Controllers\CategoriaController;
                     Route::prefix('categorias')->group(function () {
 
                         Route::get('/', [CategoriaController::class, 'index'])->name('categorias.home');
-                        Route::get('/list', [CategoriaController::class, 'get_all'])->name('categorias.list'); 
-
                         Route::get('/create', [CategoriaController::class, 'create'])->name('categoria.create');
                         Route::post('/create', [CategoriaController::class, 'save'])->name('categoria.save');
                         Route::get('/{id}/edit', [CategoriaController::class, 'edit_view'])->name('categoria.edit');
@@ -70,7 +67,6 @@ use App\Http\Controllers\CategoriaController;
                     Route::prefix('noticias')->group(function () {
 
                         Route::get('/', [NoticiaController::class, 'index'])->name('noticias.home'); 
-                        Route::get('/list', [NoticiaController::class, 'list_noticias'])->name('noticias.list');
 
                         Route::get('/create', [NoticiaController::class, 'create'])->name('noticias.create');
                         Route::post('/create', [NoticiaController::class, 'save'])->name('noticias.save');
