@@ -7,6 +7,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\testController;
 
 use App\Http\Controllers\PublicController;
+
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriaController;
@@ -82,8 +84,8 @@ use App\Http\Controllers\ComentarioController;
                     });
 
 
-                Route::get('/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
-                Route::put('/{id}', [UserController::class, 'save_edit'])->name('users.update');
+                    Route::get('/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+                    Route::put('/{id}', [UserController::class, 'save_edit'])->name('users.update');
 
             });
 
@@ -95,21 +97,36 @@ use App\Http\Controllers\ComentarioController;
 
         Route::get('/list', [PublicController::class, 'noticias'])->name('noticias');
         Route::get('/search', [PublicController::class, 'search_noticia'])->name('search');
-        Route::get('/{slug}', [PublicController::class, 'detalhes'])->name('detalhes');
+        Route::get('/{slug}/detalhes', [PublicController::class, 'detalhes'])->name('detalhes');
 
     });
 
+    Route::prefix('public')->group(function(){
 
-    Route::get('/register', [PublicController::class,'create'])->name('create');
-    Route::post('/register', [PublicController::class,'save'])->name('save');
+        route::prefix('noticias')->group( function (){
 
-    Route::get('/{noticia_id}/comentar', [ComentarioController::class,'create'])->name('comentario.create');
-    Route::post('/noticias/{noticia_id}/comentar', [ComentarioController::class, 'save'])->name('comentario.save');
+            Route::get('/register', [PublicController::class,'create'])->name('create');
+            Route::post('/register', [PublicController::class,'save'])->name('save');
+            Route::post('/noticias/{noticia_id}/comentar', [ComentarioController::class, 'save'])->name('comentario.save');
+            Route::post('/noticias/{noticia}/like', [LikeController::class, 'like'])->name('noticias.like');
 
-    Route::get('/recentes', [PublicController::class, 'novas_noticias'])->name('noticias.recentes');
-    Route::get('/antigas', [PublicController::class, 'velhas_noticias'])->name('noticias.antigas');
-    Route::get('/categorias', [PublicController::class, 'categorias'])->name('categorias');
-    Route::get('/noticia_categoria/{id}', [PublicController::class, 'noticia_categoria'])->name('noticia_categoria');
+            Route::get('/recentes', [PublicController::class, 'novas_noticias'])->name('noticias.recentes');
+            Route::get('/antigas', [PublicController::class, 'velhas_noticias'])->name('noticias.antigas');
+            Route::get('/categorias', [PublicController::class, 'categorias'])->name('categorias');
+            Route::get('/noticia_categoria/{id}', [PublicController::class, 'noticia_categoria'])->name('noticia_categoria');
 
+        });
 
+       Route::prefix('comentarios')->group(function () {
+
+            Route::get('/{comentario_id}/editar', [ComentarioController::class, 'edit'])->name('comentario.edit');
+            Route::get('/{noticia_id}/create', [ComentarioController::class, 'create'])->name('comentario.create');
+            Route::put('/{comentario_id}/update', [ComentarioController::class, 'update'])->name('comentario.update');
+            Route::Delete('/{comentario_id}/delete', [ComentarioController::class, 'delete'])->name('comentario.delete');
+
+        });
+       
+
+    });
+   
 

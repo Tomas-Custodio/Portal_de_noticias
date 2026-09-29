@@ -3,62 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class LikeController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+use App\Models\Noticia;
+use App\Models\Like;
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+class LikeController extends Controller {
+    public function like(Noticia $noticia) {
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $user = Auth::user()->id;
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        # vericando se: e esse usuario ja curtiu essa noticia.
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        $like = Like::where('user_id', $user->id)->where('noticia_id', $noticia->id)->first();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+            if ($like) {
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
-}
+            # se o usuario ja deu like, e  e da um like pela segunda vez , 
+            # ele apaga o like anterior,
+                $like->delete(); } 
+                
+            else {
+
+                # se o usuario ainda nao deu like, ele cria o like
+                Like::create([
+                    'user_id' => $user->id,
+                    'noticia_id' => $noticia->id,
+                ]);
+            }
+
+        return back();
+}}

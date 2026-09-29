@@ -2,16 +2,21 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\Comentario;
+use App\Models\User;
 use Illuminate\Auth\Access\Response;
-Use Illuminate\Support\Facades\Auth;
 
-class UserPolicy{
+class ComentarioPolicy
+{
     /**
      * Determine whether the user can view any models.
      */
-    public function onlyowner(User $user, Comentario $comentario ): bool {
+    public function viewAny(User $user): bool
+    {
+        return false;
+    }
+
+     public function onlyowner(User $user, Comentario $comentario ): bool {
 
         if ( $user->id === $comentario->user_id){
 
@@ -27,16 +32,9 @@ class UserPolicy{
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, User $model): bool {
-
-        if ( $user->role === 'admin' ){
-            return True;
-        }
-
-        else{
-             return false;
-        }
-        
+    public function view(User $user, Comentario $comentario): bool
+    {
+        return false;
     }
 
     /**
@@ -50,7 +48,7 @@ class UserPolicy{
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, User $model): bool
+    public function update(User $user, Comentario $comentario): bool
     {
         return false;
     }
@@ -58,7 +56,7 @@ class UserPolicy{
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, User $model): bool
+    public function delete(User $user, Comentario $comentario): bool
     {
         return false;
     }
@@ -66,7 +64,7 @@ class UserPolicy{
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, User $model): bool
+    public function restore(User $user, Comentario $comentario): bool
     {
         return false;
     }
@@ -74,7 +72,7 @@ class UserPolicy{
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, User $model): bool
+    public function forceDelete(User $user, Comentario $comentario): bool
     {
         return false;
     }

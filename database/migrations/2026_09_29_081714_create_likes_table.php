@@ -9,19 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+    public function up(): void {
         Schema::create('likes', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+
+        $table->id();
+        $table->foreignId('user_id')->cascadeOnDelete();
+        $table->foreignId('noticia_id')->cascadeOnDelete();
+        $table->timestamps();
+        $table->unique(['user_id', 'noticia_id']); });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
+
+    public function down(): void {
+
         Schema::dropIfExists('likes');
     }
 };

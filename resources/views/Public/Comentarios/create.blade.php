@@ -6,7 +6,6 @@
 
 <div class="min-h-screen bg-slate-50 text-slate-900">
 
-```
 <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
 
     {{-- BREADCRUMB --}}
@@ -151,11 +150,7 @@
 
                     <div>
 
-                        <h2 class="text-2xl font-black tracking-tight text-slate-950">
-                            Comentários
-                        </h2>
-
-                        <p class="mt-1 text-sm text-slate-500">
+                        <p class="mt-1 text-sm text-slate-700">
                             Partilhe a sua opinião sobre esta notícia.
                         </p>
 
@@ -256,6 +251,27 @@
                         class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md"
                     >
 
+                    <section class=" flex flex-row items-center justify-end gap-2  text-white">
+
+                        @can('onlyowner', $comentario)
+
+                            <a href="{{ route('comentario.edit',$comentario->id) }}" class="rounded-full bg-red-400 p-1"> editar </a>
+
+                                <form action="{{ route('comentario.delete',$comentario->id) }}" method="POST" 
+                                    class=" focus-visible:bg-red-900 rounded-full bg-green-400 p-1 cursos-pointer">
+
+                                    @csrf
+
+                                @method('Delete')
+
+                                <button type="submit" class="cursor-pointer">Apagar</button>
+
+                            </form>
+
+                        @endcan
+                     
+                    </section>
+
                         <div class="flex gap-3">
 
                             {{-- AVATAR --}}
@@ -269,12 +285,13 @@
                             <div class="min-w-0 flex-1">
 
                                 {{-- CABEÇALHO --}}
+
                                 <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
 
                                     <span class="text-sm font-bold text-slate-900">
                                         {{ $comentario->usuario->nome  }}
                                     </span>
-
+                                    
                                     <span class="text-xs text-slate-400">
                                         •
                                     </span>
@@ -391,6 +408,7 @@
 
 
                             {{-- CAMPO --}}
+
                             <div class="min-w-0 flex-1">
 
                                 <textarea
@@ -419,8 +437,11 @@
 
 
                                     <button
+
                                         type="submit"
-                                        class="ml-auto inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 hover:shadow-xl active:scale-[0.98]"
+
+                                        class="ml-auto inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 
+                                        hover:shadow-xl active:scale-[0.98]"
                                     >
 
                                         Comentar
@@ -457,15 +478,16 @@
 
                 {{-- AVISO PARA VISITANTES --}}
 
+
                 <div class="rounded-3xl border border-slate-200 bg-white p-5 text-center shadow-sm">
 
                     <p class="text-sm text-slate-500">
 
-                        <a
-                            href="{{ route('login') }}"
-                            class="font-bold text-blue-600 hover:text-blue-700"
-                        >
+                        <a href="{{ route('login') }}"
+                            class="font-bold text-blue-600 hover:text-blue-700">
+                            
                             Inicie sessão
+
                         </a>
 
                         para comentar esta notícia.
@@ -482,7 +504,7 @@
     </div>
 
 </div>
-```
+
 
 </div>
 

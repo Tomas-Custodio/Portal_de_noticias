@@ -40,4 +40,9 @@ class Noticia extends Model {
 
         return $this->hasMany(Comentario::class,'noticia_id');
     }
+
+    public function likes() {
+
+        return $this->hasMany(Like::class,'noticia_id');
+    }
 }

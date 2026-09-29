@@ -48,4 +48,10 @@ class User extends Authenticatable
  
         return $this->hasmany(Comentario::class, "id_user");
     }
+
+    public function likes(){
+
+        return $this->hasMany(Like::class,'user_id');
+    }
+
 }
