@@ -35,4 +35,9 @@ class Noticia extends Model {
 
         return $this->Belongsto(Categoria::class, "categoria_id");
     }
+
+    public function comentarios(){
+
+        return $this->hasMany(Comentario::class,'noticia_id');
+    }
 }

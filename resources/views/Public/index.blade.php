@@ -94,11 +94,14 @@
 
 
         {{-- GRID DE NOTÍCIAS --}}
+        
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
             @foreach ($noticias as $noticia)
 
-                <article class="group flex flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl">
+           <article class="group flex flex-col overflow-hidden rounded-3xl border
+                border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1
+                hover:border-blue-200 hover:shadow-xl">
 
                     {{-- IMAGEM --}}
                     <div class="relative overflow-hidden">
@@ -125,7 +128,6 @@
 
 
                     {{-- CONTEÚDO --}}
-
                     <div class="flex flex-1 flex-col p-5">
 
                         <h3 class="text-lg font-bold leading-snug text-slate-900 line-clamp-2 transition group-hover:text-blue-600">
@@ -137,21 +139,98 @@
                         </p>
 
 
-                        {{-- LINK --}}
-                        <a
-                            href="{{ route('detalhes', $noticia->slug) }}"
-                            class="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 transition hover:text-blue-700"
-                        >
-                            Ler mais
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M5 12h14"/>
-                                <path d="m13 6 6 6-6 6"/>
-                            </svg>
-                        </a>
+                        {{-- AÇÕES --}}
+                        <div class="mt-4 flex items-center justify-between border-t border-slate-100 pt-4">
+
+                            {{-- LIKES + COMENTÁRIOS --}}
+                            <div class="flex items-center gap-1">
+
+                                {{-- LIKE --}}
+                                <button
+                                    type="button"
+                                    title="Gostar"
+                                    class="group/like inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-500 transition duration-200 hover:bg-red-50 hover:text-red-500 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-red-500/20 active:scale-[0.95]"
+                                >
+
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-4 w-4 transition duration-200 group-hover/like:scale-110"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                    </svg>
+
+                                    <span>Gosto</span>
+
+                                </button>
+
+
+                                {{-- COMENTÁRIOS --}}
+                                <a
+                                    href="{{ route('comentario.create', $noticia->id) }}"
+                                    title="Ver comentários"
+                                    class="group/cmt inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-500 transition duration-200 hover:bg-blue-50 hover:text-blue-600 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/20 active:scale-[0.95]"
+                                >
+
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-4 w-4 transition duration-200 group-hover/cmt:scale-110"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                                    </svg>
+
+                                    <span>Comentar</span>
+
+                                    {{-- COUNT DOS COMENTÁRIOS --}}
+                                    <span class="min-w-[20px] rounded-full bg-blue-50 px-1.5 py-0.5 text-center text-[10px] font-bold text-blue-600">
+                                        {{ $noticia->comentarios->count() }}
+                                    </span>
+
+                                </a>
+
+                            </div>
+
+
+                            {{-- LER MAIS --}}
+                            <a
+                                href="{{ route('detalhes', $noticia->slug) }}"
+                                class="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 transition hover:text-blue-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/20 focus-visible:rounded-lg"
+                            >
+
+                                Ler mais
+
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-4 w-4 transition duration-200 group-hover:translate-x-1"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <path d="M5 12h14"/>
+                                    <path d="m13 6 6 6-6 6"/>
+                                </svg>
+
+                            </a>
+
+                        </div>
 
                     </div>
 
-                </article>
+           </article>
 
             @endforeach
 

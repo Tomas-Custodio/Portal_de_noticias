@@ -10,6 +10,7 @@ use App\Http\Controllers\PublicController;
 use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ComentarioController;
 
 
     Route::get('/', [HomeController::class, 'Home'])->name('home');
@@ -101,6 +102,10 @@ use App\Http\Controllers\CategoriaController;
 
     Route::get('/register', [PublicController::class,'create'])->name('create');
     Route::post('/register', [PublicController::class,'save'])->name('save');
+
+    Route::get('/{noticia_id}/comentar', [ComentarioController::class,'create'])->name('comentario.create');
+    Route::post('/noticias/{noticia_id}/comentar', [ComentarioController::class, 'save'])->name('comentario.save');
+
     Route::get('/recentes', [PublicController::class, 'novas_noticias'])->name('noticias.recentes');
     Route::get('/antigas', [PublicController::class, 'velhas_noticias'])->name('noticias.antigas');
     Route::get('/categorias', [PublicController::class, 'categorias'])->name('categorias');

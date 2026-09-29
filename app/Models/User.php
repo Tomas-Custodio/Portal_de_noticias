@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 use App\Models\Noticia;
+use App\Models\comentario;
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
@@ -41,5 +42,10 @@ class User extends Authenticatable
     public function noticias() {
  
         return $this->hasmany(Noticia::class, "id_user");
+    }
+
+    public function comentarios() {
+ 
+        return $this->hasmany(Comentario::class, "id_user");
     }
 }

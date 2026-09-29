@@ -73,164 +73,154 @@
 
         {{-- NAV --}}
 
-        <nav class="flex-1 space-y-1.5 overflow-y-auto px-3 pb-6">
+       <nav class="flex-1 space-y-1.5 overflow-y-auto px-3 pb-6">
 
-                {{-- DASHBOARD --}}
-        <a href="{{ route('users.dashboard') }}"
-            class="group relative flex items-center gap-4 overflow-hidden rounded-2xl px-4 py-3 text-sm font-medium text-slate-600
-                transition-all duration-300 ease-out
-                hover:-translate-y-0.5 hover:bg-indigo-50/70 hover:text-indigo-600 hover:shadow-sm hover:shadow-indigo-500/5
-                focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-500/20
-                active:translate-y-0 active:scale-[0.98]
-                {{ request()->routeIs('users.dashboard') ? 'bg-indigo-50 font-semibold text-indigo-600 shadow-sm' : '' }}">
+    {{-- DASHBOARD --}}
+    <a href="{{ route('users.dashboard') }}"
+       class="group relative flex items-center gap-4 overflow-hidden rounded-2xl px-4 py-3 text-sm font-medium
+              transition-all duration-300 ease-out
+              hover:-translate-y-0.5 hover:bg-indigo-50/70 hover:text-indigo-600 hover:shadow-sm hover:shadow-indigo-500/5
+              focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-500/20
+              active:translate-y-0 active:scale-[0.98]
+              {{ request()->routeIs('users.dashboard')
+                  ? 'bg-indigo-600 text-white font-semibold shadow-md shadow-indigo-600/20'
+                  : 'text-slate-600' }}">
 
-            {{-- Barra lateral indicadora --}}
+        <span class="absolute left-0 top-1/2 h-0 w-1 -translate-y-1/2 rounded-r-full bg-white
+                     transition-all duration-300 ease-out
+                     group-hover:h-6 {{ request()->routeIs('users.dashboard') ? 'h-6' : '' }}"></span>
 
-            <span class="absolute left-0 top-1/2 h-0 w-1 -translate-y-1/2 rounded-r-full bg-indigo-600
-                        transition-all duration-300 ease-out
-                        group-hover:h-6 {{ request()->routeIs('users.dashboard') ? 'h-6' : '' }}"></span>
+        <span class="relative flex h-9 w-9 items-center justify-center rounded-xl
+                     transition-all duration-300 ease-out
+                     {{ request()->routeIs('users.dashboard')
+                         ? 'bg-white/15 text-white'
+                         : 'bg-slate-100 text-slate-500 group-hover:bg-indigo-600 group-hover:text-white group-hover:shadow-md group-hover:shadow-indigo-600/30 group-hover:scale-105' }}">
 
-            {{-- Ícone --}}
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="9" rx="1.5"/>
+                <rect x="14" y="3" width="7" height="5" rx="1.5"/>
+                <rect x="14" y="12" width="7" height="9" rx="1.5"/>
+                <rect x="3" y="16" width="7" height="5" rx="1.5"/>
+            </svg>
 
-            <span class="relative flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 text-slate-500
-                        transition-all duration-300 ease-out
-                        group-hover:scale-105 group-hover:bg-indigo-600 group-hover:text-white group-hover:shadow-md group-hover:shadow-indigo-600/30
-                        {{ request()->routeIs('users.dashboard') ? 'bg-indigo-600 text-white' : '' }}">
+        </span>
 
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="3" width="7" height="9" rx="1.5"/>
-                    <rect x="14" y="3" width="7" height="5" rx="1.5"/>
-                    <rect x="14" y="12" width="7" height="9" rx="1.5"/>
-                    <rect x="3" y="16" width="7" height="5" rx="1.5"/>
-                </svg>
-
-            </span>
-
-            {{-- Texto --}}
-            <span class="tracking-tight transition-transform duration-300 ease-out group-hover:translate-x-0.5">
-                Dashboard
-            </span>
-        </a>
+        <span class="tracking-tight transition-transform duration-300 ease-out group-hover:translate-x-0.5">
+            Dashboard
+        </span>
+    </a>
 
 
-                {{-- NOTÍCIAS --}}
-                <a
-                    href="{{ route('noticias.home') }}"
-                    class="group relative flex items-center gap-4 overflow-hidden rounded-2xl px-4 py-3 text-sm font-medium text-slate-600
-                           transition-all duration-300 ease-out
-                           hover:-translate-y-0.5 hover:bg-indigo-50/70 hover:text-indigo-600 hover:shadow-sm hover:shadow-indigo-500/5
-                           focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-500/20
-                           active:translate-y-0 active:scale-[0.98]
-                           {{ request()->routeIs('noticias.*') ? 'bg-indigo-50 font-semibold text-indigo-600 shadow-sm' : '' }}"
-                >
-                    <span class="absolute left-0 top-1/2 h-0 w-1 -translate-y-1/2 rounded-r-full bg-indigo-600
-                                 transition-all duration-300 ease-out
-                                 group-hover:h-6 {{ request()->routeIs('noticias.*') ? 'h-6' : '' }}"></span>
+    {{-- NOTÍCIAS --}}
+    <a href="{{ route('noticias.home') }}"
+       class="group relative flex items-center gap-4 overflow-hidden rounded-2xl px-4 py-3 text-sm font-medium
+              transition-all duration-300 ease-out
+              hover:-translate-y-0.5 hover:bg-indigo-50/70 hover:text-indigo-600 hover:shadow-sm hover:shadow-indigo-500/5
+              focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-500/20
+              active:translate-y-0 active:scale-[0.98]
+              {{ request()->routeIs('noticias.*')
+                  ? 'bg-indigo-600 text-white font-semibold shadow-md shadow-indigo-600/20'
+                  : 'text-slate-600' }}">
 
-                    <span class="relative flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 text-slate-500
-                                 transition-all duration-300 ease-out
-                                 group-hover:scale-105 group-hover:bg-indigo-600 group-hover:text-white group-hover:shadow-md group-hover:shadow-indigo-600/30
-                                 {{ request()->routeIs('noticias.*') ? 'bg-indigo-600 text-white' : '' }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 4h13a2 2 0 0 1 2 2v12a2 2 0 0 0 2 2H6a2 2 0 0 1-2-2z"/>
-                            <path d="M19 6h1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2"/>
-                            <path d="M8 8h7"/>
-                            <path d="M8 12h7"/>
-                            <path d="M8 16h4"/>
-                        </svg>
-                    </span>
+        <span class="absolute left-0 top-1/2 h-0 w-1 -translate-y-1/2 rounded-r-full bg-white
+                     transition-all duration-300 ease-out
+                     group-hover:h-6 {{ request()->routeIs('noticias.*') ? 'h-6' : '' }}"></span>
 
-                    <span class="tracking-tight transition-transform duration-300 ease-out group-hover:translate-x-0.5">
-                        Notícias
-                    </span>
-                </a>
+        <span class="relative flex h-9 w-9 items-center justify-center rounded-xl
+                     transition-all duration-300 ease-out
+                     {{ request()->routeIs('noticias.*')
+                         ? 'bg-white/15 text-white'
+                         : 'bg-slate-100 text-slate-500 group-hover:bg-indigo-600 group-hover:text-white group-hover:shadow-md group-hover:shadow-indigo-600/30 group-hover:scale-105' }}">
 
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h13a2 2 0 0 1 2 2v12a2 2 0 0 0 2 2H6a2 2 0 0 1-2-2z"/>
+                <path d="M19 6h1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2"/>
+                <path d="M8 8h7"/>
+                <path d="M8 12h7"/>
+                <path d="M8 16h4"/>
+            </svg>
 
-                {{-- CATEGORIAS --}}
-                <a
-                    href="{{ route('categorias.home') }}"
-                    class="group relative flex items-center gap-4 overflow-hidden rounded-2xl px-4 py-3 text-sm font-medium text-slate-600
-                           transition-all duration-300 ease-out
-                           hover:-translate-y-0.5 hover:bg-indigo-50/70 hover:text-indigo-600 hover:shadow-sm hover:shadow-indigo-500/5
-                           focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-500/20
-                           active:translate-y-0 active:scale-[0.98]
-                           {{ request()->routeIs('categorias.*') ? 'bg-indigo-50 font-semibold text-indigo-600 shadow-sm' : '' }}"
-                >
-                    <span class="absolute left-0 top-1/2 h-0 w-1 -translate-y-1/2 rounded-r-full bg-indigo-600
-                                 transition-all duration-300 ease-out
-                                 group-hover:h-6 {{ request()->routeIs('categorias.*') ? 'h-6' : '' }}"></span>
+        </span>
 
-                    <span class="relative flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 text-slate-500
-                                 transition-all duration-300 ease-out
-                                 group-hover:scale-105 group-hover:bg-indigo-600 group-hover:text-white group-hover:shadow-md group-hover:shadow-indigo-600/30
-                                 {{ request()->routeIs('categorias.*') ? 'bg-indigo-600 text-white' : '' }}">
-
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M3 6a2 2 0 0 1 2-2h3l2 2h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                        </svg>
-                    </span>
-
-                    <span class="tracking-tight transition-transform duration-300 ease-out group-hover:translate-x-0.5">
-                        Categorias
-                    </span>
-                </a>
+        <span class="tracking-tight transition-transform duration-300 ease-out group-hover:translate-x-0.5">
+            Notícias
+        </span>
+    </a>
 
 
-                {{-- DIVIDER --}}
-                <div class="my-3 border-t border-slate-100"></div>
+    {{-- CATEGORIAS --}}
+    <a href="{{ route('categorias.home') }}"
+       class="group relative flex items-center gap-4 overflow-hidden rounded-2xl px-4 py-3 text-sm font-medium
+              transition-all duration-300 ease-out
+              hover:-translate-y-0.5 hover:bg-indigo-50/70 hover:text-indigo-600 hover:shadow-sm hover:shadow-indigo-500/5
+              focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-500/20
+              active:translate-y-0 active:scale-[0.98]
+              {{ request()->routeIs('categorias.*')
+                  ? 'bg-indigo-600 text-white font-semibold shadow-md shadow-indigo-600/20'
+                  : 'text-slate-600' }}">
+
+        <span class="absolute left-0 top-1/2 h-0 w-1 -translate-y-1/2 rounded-r-full bg-white
+                     transition-all duration-300 ease-out
+                     group-hover:h-6 {{ request()->routeIs('categorias.*') ? 'h-6' : '' }}"></span>
+
+        <span class="relative flex h-9 w-9 items-center justify-center rounded-xl
+                     transition-all duration-300 ease-out
+                     {{ request()->routeIs('categorias.*')
+                         ? 'bg-white/15 text-white'
+                         : 'bg-slate-100 text-slate-500 group-hover:bg-indigo-600 group-hover:text-white group-hover:shadow-md group-hover:shadow-indigo-600/30 group-hover:scale-105' }}">
+
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 6a2 2 0 0 1 2-2h3l2 2h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            </svg>
+
+        </span>
+
+        <span class="tracking-tight transition-transform duration-300 ease-out group-hover:translate-x-0.5">
+            Categorias
+        </span>
+    </a>
 
 
-              {{-- USUÁRIOS --}}
-              
-               <a href="{{ route('users.home') }}"
-                class="group relative flex items-center gap-4 overflow-hidden rounded-2xl px-4 py-3 text-sm font-medium text-slate-600
-                    transition-all duration-300 ease-out
-                    hover:-translate-y-0.5 hover:bg-indigo-50/70 hover:text-indigo-600 hover:shadow-sm hover:shadow-indigo-500/5
-                    focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-500/20
-                    active:translate-y-0 active:scale-[0.98]
-                    {{ request()->routeIs('users.home') ? 'bg-indigo-50 font-semibold text-indigo-600 shadow-sm' : '' }}">
+    {{-- DIVIDER --}}
+    <div class="my-3 border-t border-slate-100"></div>
 
-                {{-- Barra lateral indicadora --}}
 
-                <span
-                    class="absolute left-0 top-1/2 h-0 w-1 -translate-y-1/2 rounded-r-full bg-indigo-600
-                        transition-all duration-300 ease-out
-                        group-hover:h-6 {{ request()->routeIs('users.home') ? 'h-6' : '' }}"
-                ></span>
+    {{-- USUÁRIOS --}}
+    <a href="{{ route('users.home') }}"
+       class="group relative flex items-center gap-4 overflow-hidden rounded-2xl px-4 py-3 text-sm font-medium
+              transition-all duration-300 ease-out
+              hover:-translate-y-0.5 hover:bg-indigo-50/70 hover:text-indigo-600 hover:shadow-sm hover:shadow-indigo-500/5
+              focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-500/20
+              active:translate-y-0 active:scale-[0.98]
+              {{ request()->routeIs('users.home')
+                  ? 'bg-indigo-600 text-white font-semibold shadow-md shadow-indigo-600/20'
+                  : 'text-slate-600' }}">
 
-                {{-- Ícone --}}
+        <span class="absolute left-0 top-1/2 h-0 w-1 -translate-y-1/2 rounded-r-full bg-white
+                     transition-all duration-300 ease-out
+                     group-hover:h-6 {{ request()->routeIs('users.home') ? 'h-6' : '' }}"></span>
 
-                <span
-                    class="relative flex h-9 w-9 items-center justify-center rounded-xl bg-slate-200 text-slate-500
-                        transition-all duration-300 ease-out
-                        group-hover:scale-105 group-hover:bg-indigo-600 group-hover:text-white group-hover:shadow-md group-hover:shadow-indigo-600/30
-                        {{ request()->routeIs('users.home') ? 'bg-indigo-600 text-white' : '' }}"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-[18px] w-[18px]"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                        <circle cx="9" cy="7" r="4"/>
-                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                    </svg>
-                </span>
+        <span class="relative flex h-9 w-9 items-center justify-center rounded-xl
+                     transition-all duration-300 ease-out
+                     {{ request()->routeIs('users.home')
+                         ? 'bg-white/15 text-white'
+                         : 'bg-slate-200 text-slate-500 group-hover:bg-indigo-600 group-hover:text-white group-hover:shadow-md group-hover:shadow-indigo-600/30 group-hover:scale-105' }}">
 
-                {{-- Texto --}}
-                <span class="tracking-tight transition-transform duration-300 ease-out group-hover:translate-x-0.5">
-                    Usuários
-                </span>
-            </a>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
 
-            </nav>
+        </span>
 
+        <span class="tracking-tight transition-transform duration-300 ease-out group-hover:translate-x-0.5">
+            Usuários
+        </span>
+    </a>
+
+</nav>
 
             {{-- RODAPÉ SIDEBAR — LOGOUT --}}
             <div class="border-t border-slate-100 p-4">
@@ -240,7 +230,7 @@
 
                     <button
                         type="submit"
-                        class="group flex w-full items-center gap-3 rounded-2xl border border-red-100 bg-white px-4 py-3 text-sm font-semibold text-red-600 shadow-sm
+                        class="group flex w-full items-center gap-3 rounded-2xl border border-red-100 bg-white px-4 py-3 text-sm font-semibold text-red-600 shadow-sm focus-visible:bg-red-600 cursor-pointer
                                transition-all duration-300 ease-out
                                hover:-translate-y-0.5 hover:border-red-200 hover:bg-red-50 hover:shadow-md hover:shadow-red-500/5
                                focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-red-500/30
