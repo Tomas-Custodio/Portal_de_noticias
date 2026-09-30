@@ -14,7 +14,7 @@ class PublicController extends Controller {
     
     public function noticias (){
     
-        $noticias = Noticia::where("estado", "Publicado")->orderby('data','asc')->paginate(10);
+        $noticias = Noticia::where("estado", "Publicado")->orderby('data','desc')->paginate(10);
         return view("Public.Noticias.list",compact('noticias'));
     }
 

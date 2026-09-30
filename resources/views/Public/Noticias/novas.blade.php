@@ -17,7 +17,7 @@
                 <div class="mb-3 flex items-center gap-2 text-sm text-slate-500">
                     <a href="{{ route('home') }}" class="hover:text-blue-600">Home</a>
                     <span>/</span>
-                    <a href="{{ route('noticias.list') }}" class="hover:text-blue-600">Notícias</a>
+                    <a href="{{ route('noticias') }}" class="hover:text-blue-600">Notícias</a>
                     <span>/</span>
                     <span class="font-medium text-slate-700">Recentes</span>
                 </div>
