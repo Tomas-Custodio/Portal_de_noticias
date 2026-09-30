@@ -25,7 +25,6 @@ class ComentarioController extends Controller
 
             $data = $request->validate([
                 'user_id'      => 'required|integer|exists:users,id',
-                'categoria_id' => 'required|integer|exists:categorias,id',
                 'descricao'    => 'required|string|min:2|max:1000',
             ]);
 
@@ -35,7 +34,6 @@ class ComentarioController extends Controller
                 
                         'user_id'      => $data['user_id'],
                         'noticia_id'   => $noticia->id,
-                        'categoria_id' => $data['categoria_id'],
                         'descricao'    => $data['descricao'] ];
 
             // 2. Confirma que a notícia existe (404 se não existir)

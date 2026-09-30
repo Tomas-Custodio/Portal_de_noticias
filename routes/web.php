@@ -107,7 +107,6 @@ use App\Http\Controllers\ComentarioController;
 
             Route::get('/register', [PublicController::class,'create'])->name('create');
             Route::post('/register', [PublicController::class,'save'])->name('save');
-            Route::post('/noticias/{noticia_id}/comentar', [ComentarioController::class, 'save'])->name('comentario.save');
 
             Route::post('/noticias/{noticia}/like', [LikeController::class, 'like'])->name('like.save');
 
@@ -121,6 +120,7 @@ use App\Http\Controllers\ComentarioController;
        Route::prefix('comentarios')->group(function () {
 
             Route::get('/{comentario_id}/editar', [ComentarioController::class, 'edit'])->name('comentario.edit');
+            Route::post('/noticias/{noticia_id}/comentar', [ComentarioController::class, 'save'])->name('comentario.save');
             Route::get('/{noticia_id}/create', [ComentarioController::class, 'create'])->name('comentario.create');
             Route::put('/{comentario_id}/update', [ComentarioController::class, 'update'])->name('comentario.update');
             Route::Delete('/{comentario_id}/delete', [ComentarioController::class, 'delete'])->name('comentario.delete');
