@@ -13,7 +13,7 @@
     {{-- VOLTAR --}}
     <a
         href="{{ route('noticias') }}"
-        class="group mb-8 inline-flex items-center gap-2 text-sm font-semibold text-blue-600 transition-colors hover:text-blue-700"
+        class="group mb-8 inline-flex items-center gap-2 text-sm font-semibold text-blue-600 transition-colors duration-200 hover:text-blue-700"
     >
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -42,19 +42,19 @@
 
 
         {{-- =====================================================
-            NOTÍCIA
+            NOTÍCIA / IDENTIFICAÇÃO
         ====================================================== --}}
 
-        <aside class="lg:col-span-3 lg:sticky lg:top-6">
+        <aside class="min-w-0 lg:col-span-3 lg:sticky lg:top-6 lg:self-start">
 
             {{-- TÍTULO --}}
             <div class="mb-6">
 
-                <p class="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-blue-600">
-                    Sobre
+                <p class="mb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-blue-600">
+                    Notícia
                 </p>
 
-                <h1 class="text-2xl font-black leading-tight tracking-tight text-slate-950 sm:text-3xl">
+                <h1 class="text-2xl font-black leading-[1.15] tracking-tight text-slate-950 sm:text-3xl">
                     {{ $noticia->titulo }}
                 </h1>
 
@@ -71,7 +71,7 @@
                         <img
                             src="{{ asset('storage/' . $noticia->img) }}"
                             alt="{{ $noticia->titulo }}"
-                            class="h-full w-full object-cover"
+                            class="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
                             loading="lazy"
                         >
 
@@ -83,24 +83,20 @@
 
 
             {{-- METADADOS --}}
-            <div class="mt-5 space-y-3">
+            <div class="mt-5">
 
                 @if($noticia->categoria)
 
-                    <div>
-
-                        <span class="inline-flex items-center rounded-full bg-blue-50 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-blue-600">
-                            {{ $noticia->categoria->nome }}
-                        </span>
-
-                    </div>
+                    <span class="inline-flex items-center rounded-full bg-blue-50 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-blue-600">
+                        {{ $noticia->categoria->nome }}
+                    </span>
 
                 @endif
 
 
-                <div class="border-t border-slate-200 pt-4">
+                <div class="mt-4 border-t border-slate-200 pt-4">
 
-                    <p class="text-xs leading-6 text-slate-500">
+                    <p class="text-xs leading-5 text-slate-500">
 
                         Publicado por
 
@@ -108,11 +104,11 @@
                             {{ $noticia->usuario?->nome }}
                         </span>
 
-                        em
+                    </p>
 
-                        <span class="font-semibold text-slate-800">
-                            {{ \Carbon\Carbon::parse($noticia->data)->locale('pt')->translatedFormat('d \d\e F \d\e Y') }}
-                        </span>
+                    <p class="mt-1 text-xs leading-5 text-slate-400">
+
+                        {{ \Carbon\Carbon::parse($noticia->data)->locale('pt')->translatedFormat('d \d\e F \d\e Y') }}
 
                     </p>
 
@@ -132,31 +128,29 @@
 
 
             {{-- =================================================
-                CARD DE DETALHES
-                O OVERFLOW FICA SOMENTE AQUI
+                ÁREA DE LEITURA
             ================================================== --}}
 
             <article
                 class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
             >
 
-                {{-- ÁREA DE LEITURA COM SCROLL PRÓPRIO --}}
                 <div
-                    class="lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto lg:overscroll-contain
+                    class="lg:h-[calc(100vh-8rem)] lg:overflow-y-auto lg:overscroll-contain
                            [&::-webkit-scrollbar]:w-2
                            [&::-webkit-scrollbar-track]:bg-transparent
                            [&::-webkit-scrollbar-thumb]:rounded-full
-                           [&::-webkit-scrollbar-thumb]:bg-slate-300
-                           hover:[&::-webkit-scrollbar-thumb]:bg-slate-400"
+                           [&::-webkit-scrollbar-thumb]:bg-slate-200
+                           hover:[&::-webkit-scrollbar-thumb]:bg-slate-300"
                 >
 
                     {{-- CONTEÚDO --}}
-                    <div class="px-6 py-7 sm:px-8 sm:py-9 lg:px-10">
+                    <div class="px-6 py-7 sm:px-8 sm:py-9 lg:px-10 lg:py-10">
 
-                        <div class="whitespace-pre-line text-justify text-base leading-8 text-slate-700 sm:text-lg sm:leading-9">
-
+                        <div
+                            class="whitespace-pre-line text-justify text-base leading-8 text-slate-700 sm:text-lg sm:leading-9"
+                        >
                             {{ $noticia->conteudo }}
-
                         </div>
 
                     </div>
@@ -165,13 +159,13 @@
                     {{-- RESUMO --}}
                     @if($noticia->resumo)
 
-                        <div class="border-t border-slate-100 bg-slate-50/60 px-6 py-6 sm:px-8 lg:px-10">
+                        <div class="border-t border-slate-100 bg-slate-50/70 px-6 py-6 sm:px-8 lg:px-10">
 
-                            <p class="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">
+                            <p class="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-blue-600">
                                 Resumo
                             </p>
 
-                            <p class="text-justify text-base leading-8 text-slate-600 sm:text-lg sm:leading-9">
+                            <p class="text-justify text-sm leading-7 text-slate-600 sm:text-base sm:leading-8">
                                 {{ $noticia->resumo }}
                             </p>
 
@@ -193,10 +187,9 @@
 
                 <div class="p-4 sm:p-5">
 
-
                     <div class="mb-3">
 
-                        <p class="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">
+                        <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
                             Deixe o seu comentário
                         </p>
 
@@ -248,7 +241,7 @@
                                         required
                                         maxlength="1000"
                                         placeholder="Escreva o seu comentário..."
-                                        class="w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm leading-6 text-slate-700 placeholder-slate-400 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                                        class="w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm leading-6 text-slate-700 placeholder-slate-400 outline-none transition duration-200 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                                     >{{ old('descricao') }}</textarea>
 
 
@@ -261,7 +254,7 @@
                                     @enderror
 
 
-                                    <div class="mt-2.5 flex items-center justify-between gap-4">
+                                    <div class="mt-2 flex items-center justify-between gap-4">
 
                                         <span class="text-[10px] text-slate-400">
                                             Máx. 1000 caracteres
@@ -270,7 +263,7 @@
 
                                         <button
                                             type="submit"
-                                            class="inline-flex items-center gap-2 rounded-full bg-blue-600 px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-white shadow-sm transition hover:bg-blue-700 active:scale-95"
+                                            class="inline-flex items-center gap-2 rounded-full bg-blue-600 px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-white transition duration-200 hover:bg-blue-700 active:scale-95"
                                         >
 
                                             <svg
@@ -310,7 +303,7 @@
 
                             <a
                                 href="{{ route('login') }}"
-                                class="inline-flex items-center gap-2 rounded-full bg-blue-600 px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-white shadow-sm transition hover:bg-blue-700 active:scale-95"
+                                class="inline-flex items-center gap-2 rounded-full bg-blue-600 px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-white transition duration-200 hover:bg-blue-700 active:scale-95"
                             >
 
                                 <svg
@@ -348,43 +341,43 @@
             COMENTÁRIOS
         ====================================================== --}}
 
-        <aside class="min-w-0 lg:col-span-2 lg:sticky lg:top-6">
+        <aside class="min-w-0 lg:col-span-2 lg:sticky lg:top-6 lg:self-start">
 
             <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 
 
                 {{-- CABEÇALHO --}}
-                <div class="flex items-center justify-between border-b border-slate-100 px-4 py-4">
+                <div class="flex items-center justify-between border-b border-slate-100 px-4 py-3.5">
 
-                    <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-400">
+                    <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">
                         Comentários
                     </p>
 
-                    <span class="inline-flex min-w-7 items-center justify-center rounded-full bg-blue-50 px-2 py-1 text-[11px] font-bold text-blue-600">
+                    <span class="inline-flex min-w-6 items-center justify-center rounded-full bg-blue-50 px-2 py-1 text-[10px] font-bold text-blue-600">
                         {{ $noticia->comentarios->count() ?? 0 }}
                     </span>
 
                 </div>
 
 
-                {{-- LISTA COM SCROLL INDEPENDENTE --}}
+                {{-- LISTA --}}
                 <div
-                    class="max-h-[calc(100vh-9rem)] overflow-y-auto overscroll-contain
+                    class="lg:max-h-[calc(100vh-9rem)] lg:overflow-y-auto lg:overscroll-contain
                            [&::-webkit-scrollbar]:w-2
                            [&::-webkit-scrollbar-track]:bg-transparent
                            [&::-webkit-scrollbar-thumb]:rounded-full
-                           [&::-webkit-scrollbar-thumb]:bg-slate-300
-                           hover:[&::-webkit-scrollbar-thumb]:bg-slate-400"
+                           [&::-webkit-scrollbar-thumb]:bg-slate-200
+                           hover:[&::-webkit-scrollbar-thumb]:bg-slate-300"
                 >
 
                     <div class="divide-y divide-slate-100 px-4">
 
                         @forelse($noticia->comentarios as $comentario)
 
-                            <div class="flex items-start gap-3 py-4">
+                            <div class="flex items-start gap-3 py-3.5">
 
                                 {{-- AVATAR --}}
-                                <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-100 text-xs font-bold text-slate-600">
+                                <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-100 text-[10px] font-bold text-slate-600">
 
                                     {{ strtoupper(substr($comentario->usuario?->nome ?? 'A', 0, 1)) }}
 
@@ -393,13 +386,13 @@
 
                                 <div class="min-w-0 flex-1">
 
-                                    <div class="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+                                    <div class="flex items-center gap-2">
 
-                                        <span class="truncate text-xs font-semibold text-slate-800">
+                                        <span class="truncate text-[11px] font-semibold text-slate-800">
                                             {{ $comentario->usuario?->nome ?? 'Anónimo' }}
                                         </span>
 
-                                        <span class="text-[10px] text-slate-400">
+                                        <span class="shrink-0 text-[9px] text-slate-400">
                                             {{ \Carbon\Carbon::parse($comentario->created_at)->locale('pt')->diffForHumans() }}
                                         </span>
 
@@ -416,7 +409,7 @@
 
                         @empty
 
-                            <p class="py-8 text-center text-xs leading-5 text-slate-400">
+                            <p class="px-2 py-8 text-center text-xs leading-5 text-slate-400">
                                 Ainda não há comentários.
                                 <br>
                                 Seja o primeiro a comentar!
