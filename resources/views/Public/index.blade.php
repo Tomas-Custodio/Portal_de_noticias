@@ -104,6 +104,7 @@
                     hover:border-blue-200 hover:shadow-xl">
 
                         {{-- IMAGEM --}}
+
                         <div class="relative overflow-hidden">
 
                             <img
@@ -140,53 +141,63 @@
 
 
                         {{-- AÇÕES --}}  {{-- LIKES + COMENTÁRIOS --}}
+                        
+                
 
                         <section class="mt-4 flex items-center justify-between border-t border-slate-100 pt-4">
 
                             <div class="flex items-center gap-1">
 
                                 {{-- LIKE --}}
+                                
+                                @auth
+                                    
                 
                                 <form action="{{ route('like.save',$noticia->id) }}" method="Post">
-
+                                    @csrf
                                     <button
                                     type="submit"
                                     title="Gostar"
-                                    class="group/like inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-500 transition duration-200 hover:bg-red-50 hover:text-red-500 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-red-500/20 active:scale-[0.95]">
+                                    class="group/like inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-500 transition duration-200 hover:bg-red-50 hover:text-red-500 focus-visible:outline-none focus-visible:ring-4 
+                                    focus-visible:ring-red-500/20 active:scale-[0.95]">
 
-                                    @if( Auth::user()->hasLiked($noticia->id))
+                                    @if (Auth::check())
 
-                                    <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-4 w-4 transition duration-200 group-hover/like:scale-110 text-red-500"
-                                    viewBox="0 0 24 24"
-                                    fill="currentColor"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 
-                                        5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78
-                                        1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                                    </svg>
+                                        @if( Auth::user()->hasLiked($noticia->id))
 
-                                   
+                                            <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="h-4 w-4 transition duration-200 group-hover/like:scale-110 text-red-500"
+                                            viewBox="0 0 24 24"
+                                            fill="currentColor"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 
+                                                5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78
+                                                1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                            </svg>
 
-                                    @else
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="h-4 w-4 transition duration-200 group-hover/like:scale-110"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round">
+                        
+                                            @else
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    class="h-4 w-4 transition duration-200 group-hover/like:scale-110"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    stroke-width="2"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round">
 
-                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
 
-                                    </svg>
+                                            </svg>
+
+                                        @endif
                                     @endif
+
 
                                     <span>Gosto</span>
 
@@ -195,6 +206,10 @@
                                 </button>
 
                                 </form>
+
+                             @endauth
+                                    
+    
                                 
                                 {{-- COMENTÁRIOS --}}
 
@@ -254,7 +269,7 @@
 
                             </a>
 
-                        </secti>
+                        </section>
 
                     </div>
 

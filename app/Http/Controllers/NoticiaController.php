@@ -31,16 +31,6 @@ public function search(Request $request)
     $termo = $request->input('search', '');
 
     $resultado = null;
-
-
-       
-
-    
-
-        
-
-
-
        
 
 if (!empty($termo)) {

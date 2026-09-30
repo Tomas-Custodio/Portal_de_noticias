@@ -41,7 +41,7 @@ class PublicController extends Controller {
 
     public function noticia_categoria( int $categoria_id ){
 
-        $noticias_categoria = Noticia::where('categoria_id', $categoria_id)->where('estado','Publicado')->get();
+        $noticias_categoria = Noticia::where('categoria_id', $categoria_id)->where('estado','Publicado')->orderby('data','desc')->paginate(10);
         return view('Public.Categorias.noticias_categoria', compact('noticias_categoria'));
     }
 
@@ -49,7 +49,7 @@ class PublicController extends Controller {
 
     public function novas_noticias() {
 
-        $novas_noticias = Noticia::where('estado','Publicado')->orderBy('data', 'asc')->paginate(10);
+        $novas_noticias = Noticia::where('estado','Publicado')->orderBy('data', 'desc')->paginate(10);
         return view('Public.Noticias.novas', compact('novas_noticias'));
 
     }
@@ -58,7 +58,7 @@ class PublicController extends Controller {
 
     public function velhas_noticias() {
 
-        $velhas_noticias = Noticia::where('estado','Publicado')->orderBy('data', 'desc')->paginate(10);
+        $velhas_noticias = Noticia::where('estado','Publicado')->orderBy('data', 'asc')->paginate(10);
         return view('Public.Noticias.antigas', compact('velhas_noticias'));
 
     }
