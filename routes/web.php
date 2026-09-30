@@ -108,7 +108,8 @@ use App\Http\Controllers\ComentarioController;
             Route::get('/register', [PublicController::class,'create'])->name('create');
             Route::post('/register', [PublicController::class,'save'])->name('save');
             Route::post('/noticias/{noticia_id}/comentar', [ComentarioController::class, 'save'])->name('comentario.save');
-            Route::post('/noticias/{noticia}/like', [LikeController::class, 'like'])->name('noticias.like');
+
+            Route::post('/noticias/{noticia}/like', [LikeController::class, 'like'])->name('like.save');
 
             Route::get('/recentes', [PublicController::class, 'novas_noticias'])->name('noticias.recentes');
             Route::get('/antigas', [PublicController::class, 'velhas_noticias'])->name('noticias.antigas');

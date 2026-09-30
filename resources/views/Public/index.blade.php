@@ -99,20 +99,19 @@
 
             @foreach ($noticias as $noticia)
 
-           <article class="group flex flex-col overflow-hidden rounded-3xl border
-                border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1
-                hover:border-blue-200 hover:shadow-xl">
+            <article class="group flex flex-col overflow-hidden rounded-3xl border
+                    border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1
+                    hover:border-blue-200 hover:shadow-xl">
 
-                    {{-- IMAGEM --}}
-                    <div class="relative overflow-hidden">
+                        {{-- IMAGEM --}}
+                        <div class="relative overflow-hidden">
 
-                        <img
-                            src="{{ asset('storage/' . $noticia->img) }}"
-                            alt="{{ $noticia->titulo }}"
-                            class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
-                        >
+                            <img
+                                src="{{ asset('storage/' . $noticia->img) }}"
+                                alt="{{ $noticia->titulo }}"
+                                class="h-48 w-full object-cover transition duration-500 group-hover:scale-105">
 
-                        <div class="absolute inset-x-0 top-0 flex items-center justify-between p-3">
+                            <div class="absolute inset-x-0 top-0 flex items-center justify-between p-3">
 
                             <span class="rounded-lg bg-white/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-blue-600 backdrop-blur">
                                 Notícia
@@ -128,6 +127,7 @@
 
 
                     {{-- CONTEÚDO --}}
+
                     <div class="flex flex-1 flex-col p-5">
 
                         <h3 class="text-lg font-bold leading-snug text-slate-900 line-clamp-2 transition group-hover:text-blue-600">
@@ -139,19 +139,40 @@
                         </p>
 
 
-                        {{-- AÇÕES --}}
-                        <div class="mt-4 flex items-center justify-between border-t border-slate-100 pt-4">
+                        {{-- AÇÕES --}}  {{-- LIKES + COMENTÁRIOS --}}
 
-                            {{-- LIKES + COMENTÁRIOS --}}
+                        <section class="mt-4 flex items-center justify-between border-t border-slate-100 pt-4">
+
                             <div class="flex items-center gap-1">
 
                                 {{-- LIKE --}}
-                                <button
-                                    type="button"
-                                    title="Gostar"
-                                    class="group/like inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-500 transition duration-200 hover:bg-red-50 hover:text-red-500 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-red-500/20 active:scale-[0.95]"
-                                >
+                
+                                <form action="{{ route('like.save',$noticia->id) }}" method="Post">
 
+                                    <button
+                                    type="submit"
+                                    title="Gostar"
+                                    class="group/like inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-500 transition duration-200 hover:bg-red-50 hover:text-red-500 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-red-500/20 active:scale-[0.95]">
+
+                                    @if( Auth::user()->hasLiked($noticia->id))
+
+                                    <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-4 w-4 transition duration-200 group-hover/like:scale-110 text-red-500"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 
+                                        5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78
+                                        1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                    </svg>
+
+                                   
+
+                                    @else
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         class="h-4 w-4 transition duration-200 group-hover/like:scale-110"
@@ -160,22 +181,28 @@
                                         stroke="currentColor"
                                         stroke-width="2"
                                         stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                    >
+                                        stroke-linejoin="round">
+
                                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+
                                     </svg>
+                                    @endif
 
                                     <span>Gosto</span>
 
+                                   {{ $noticia->likes->count()}}
+
                                 </button>
 
-
+                                </form>
+                                
                                 {{-- COMENTÁRIOS --}}
+
                                 <a
                                     href="{{ route('comentario.create', $noticia->id) }}"
                                     title="Ver comentários"
-                                    class="group/cmt inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-500 transition duration-200 hover:bg-blue-50 hover:text-blue-600 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/20 active:scale-[0.95]"
-                                >
+                                    class="group/cmt inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-500 transition duration-200 hover:bg-blue-50 hover:text-blue-600 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/20 active:scale-[0.95]">
+
 
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -193,6 +220,7 @@
                                     <span>Comentar</span>
 
                                     {{-- COUNT DOS COMENTÁRIOS --}}
+
                                     <span class="min-w-[20px] rounded-full bg-blue-50 px-1.5 py-0.5 text-center text-[10px] font-bold text-blue-600">
                                         {{ $noticia->comentarios->count() }}
                                     </span>
@@ -226,7 +254,7 @@
 
                             </a>
 
-                        </div>
+                        </secti>
 
                     </div>
 

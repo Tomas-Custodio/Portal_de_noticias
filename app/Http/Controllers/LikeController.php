@@ -9,27 +9,26 @@ use App\Models\Noticia;
 use App\Models\Like;
 
 class LikeController extends Controller {
-    public function like(Noticia $noticia) {
+
+    public function like(int $noticia_id) {
 
         $user = Auth::user()->id;
 
         # vericando se: e esse usuario ja curtiu essa noticia.
-
-        $like = Like::where('user_id', $user->id)->where('noticia_id', $noticia->id)->first();
+        
+        $like = Like::where('user_id', $user)->where('noticia_id', $noticia_id)->first();
 
             if ($like) {
 
             # se o usuario ja deu like, e  e da um like pela segunda vez , 
             # ele apaga o like anterior,
+
                 $like->delete(); } 
                 
             else {
 
                 # se o usuario ainda nao deu like, ele cria o like
-                Like::create([
-                    'user_id' => $user->id,
-                    'noticia_id' => $noticia->id,
-                ]);
+                Like::create(['user_id' => $user, 'noticia_id' => $noticia_id,]);
             }
 
         return back();

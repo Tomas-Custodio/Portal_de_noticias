@@ -54,4 +54,9 @@ class User extends Authenticatable
         return $this->hasMany(Like::class,'user_id');
     }
 
+    public function hasLiked(int $noticia_id){
+        return $this->likes->where('noticia_id',$noticia_id)->first();
+        
+    }
+
 }
