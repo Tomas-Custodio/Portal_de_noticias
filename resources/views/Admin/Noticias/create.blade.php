@@ -22,7 +22,7 @@
 
                 <span>/</span>
 
-                <a href="{{ route('noticias.list') }}"
+                <a href="{{ route('noticias.home') }}"
                    class="transition hover:text-indigo-600">
                     Notícias
                 </a>
@@ -557,7 +557,7 @@
 
                          <section>
                             <a
-                            href="{{ route('noticias.list') }}"
+                            href="{{ route('noticias.home') }}"
                             class="mt-3 flex w-full items-center justify-center rounded-xl border border-slate-200 px-5 py-3.5 text-sm font-semibold text-slate-600  focus:bg-red-400 hover:bg-blue-200"
                         >
                             Cancelar
