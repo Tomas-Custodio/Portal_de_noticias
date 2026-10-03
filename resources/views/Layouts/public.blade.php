@@ -100,10 +100,10 @@
                        class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition
                               {{ request()->routeIs('home') ? 'bg-blue-50 font-bold text-blue-600' : 'text-slate-700 hover:bg-slate-50' }}">
 
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                            <polyline points="9 22 9 12 15 12 15 22"/>
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+</svg>
+
 
                         Início
                     </a>
@@ -141,7 +141,7 @@
 
 
                     {{-- NOTIFICAÇÕES --}}
-                    @auth
+                   {{--  @auth
                         <a href="{{ route('notificacoes.index') }}"
                            class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition
                                   {{ request()->routeIs('notificacoes.index') ? 'bg-blue-50 font-bold text-blue-600' : 'text-slate-700 hover:bg-slate-50' }}">
@@ -150,7 +150,7 @@
                                 <span class="rounded-full bg-red-600 px-2 py-0.5 text-xs font-bold text-white">{{ $naoLidas }}</span>
                             @endif
                         </a>
-                    @endauth
+                    @endauth --}}
 
 
                     {{-- DIVISOR --}}
@@ -326,14 +326,21 @@
                     {{-- NOTIFICAÇÕES + LOGOUT + ADMIN --}}
                     @auth
 
-                        <a href="{{ route('notificacoes.index') }}"
+                       {{--  <a href="{{ route('notificacoes.index') }}"
                            class="inline-flex items-center gap-2 text-sm font-medium transition hover:text-blue-600
                                   {{ request()->routeIs('notificacoes.index') ? 'font-bold text-blue-600' : 'text-slate-600' }}">
-                            🔔 Notificações
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0
+                                5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64
+                                3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+                                </svg> notificações
+
                             @if($naoLidas > 0)
                                 <span class="rounded-full bg-red-600 px-2 py-0.5 text-xs font-bold text-white">{{ $naoLidas }}</span>
                             @endif
-                        </a>
+                        </a> --}}
 
                         <form action="{{ route('logout') }}" method="POST" class="inline">
                             @csrf

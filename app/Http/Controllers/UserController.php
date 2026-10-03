@@ -6,14 +6,16 @@ use App\Notifications\NewUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;   
+use Illuminate\Suppor\Facades\Auth;
 
 use App\Models\User;
 use App\Models\Categoria;
 use App\Models\Noticia;
 
-class UserController extends Controller
-{
+class UserController extends Controller {
+   
     # function admin_home
+
     public function index() {
 
         $usuarios= User::paginate(10);
@@ -26,6 +28,15 @@ class UserController extends Controller
 
     }
 
+
+    public function notificacoes (){
+
+        $naoLidas = auth()->user()->UnreadNotifications()->count();
+        $notificacoes = auth()->user()->UnreadNotifications()->paginate(10);
+       
+        return view('Admin.Notificacoes.index',compact('naoLidas','notificacoes'));
+
+    }
      public function dashborad() {
 
         // ============ ESTATÍSTICAS GERAIS ============
@@ -118,7 +129,6 @@ class UserController extends Controller
         # verifying if the email already exists
 
         if (User::where('email', $user_data['email'])->exists()) {
-
             return redirect()->back()->with('msg','Esse email já existe no sistema, use outro por favor.');
         }
 
@@ -126,16 +136,12 @@ class UserController extends Controller
         $user_data['password'] = Hash::make($user_data['password']);
         $created_user = User::create($user_data);
 
-        $admins = User::where('role','admin')->where('id','!=', $created_user->id)->get();
+        $admins = User::where('role','admin')->where('id','!==', $created_user->id)->get();
         Notification::send($admins, new NewUser($created_user));
 
 
         return redirect()
-            ->route('users.home')
-            ->with(
-                'msg',
-                'Usuário ' . $created_user->name . ' criado com êxito!'
-            );
+            ->route('users.home')->with('msg','Usuário ' . $created_user->name . ' criado com êxito!');
     }
 
 

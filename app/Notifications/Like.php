@@ -6,19 +6,25 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Models\Noticia;
+use Illuminate\Support\Str;
 
-class NovaNoticia extends Notification
+class Like extends Notification
 {
     use Queueable;
 
-    public object $noticia;
+    # dados do usuario que reagiu no post , e o referido post
+    public object $user;
+     public object $noticia;  
+
 
     /**
      * Create a new notification instance.
      */
-    public function __construct( object $noticia)
-    {
+    public function __construct( object $noticia,object $user){
+        
         $this->noticia = $noticia;
+        $this->user = $user;
     }
 
     /**
@@ -28,7 +34,7 @@ class NovaNoticia extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database']; /*['mail']*/
+        return ['database'];
     }
 
     /**
@@ -39,19 +45,9 @@ class NovaNoticia extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'titulo' => "Uma nova noticia acabou de ser adicionada com o titulo de {$this->noticia->titulo}",
-            'url'    =>  route('detalhes', $this->noticia->id),
+            'titulo' => " o usuario {$this->user->nome} 
+             acabou de reagir com adoro a sua publicacao" . Str::limit($this->noticia->titulo,12),
+            'url' => '',
         ];
     }
-
-    /**
-     * Get the mail representation of the notification.
-     */
-    /*  public function toMail(object $notifiable): MailMessage
-    {
-        return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', url('/'))
-            ->line('Thank you for using our application!');
-    } */
 }

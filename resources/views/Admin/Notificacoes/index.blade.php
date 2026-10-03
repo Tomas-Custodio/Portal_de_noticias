@@ -1,11 +1,10 @@
-@extends('Layouts.public')
+@extends('Layouts/admin')
+
+@section('title', 'Nova Notícia')
+
+@section('page_title', 'Notificacoes')
 
 @section('conteudo')
-
-@php
-    $naoLidas = auth()->user()->unreadNotifications()->count();
-@endphp
-
 <div class="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-10">
 
     {{-- ==================== HEADER ==================== --}}
@@ -147,9 +146,9 @@
                         </button>
                     </form>
 
-                    <section>
+                  {{--   <section>
                         <a href="{{ url($n->data['url']) }}">ler</a>
-                    </section>
+                    </section> --}}
 
                     <form method="POST" action="{{ route('notificacoes.destroy', $n->id) }}">
                         @csrf
@@ -197,5 +196,6 @@
     @endif
 
 </div>
+
 
 @endsection

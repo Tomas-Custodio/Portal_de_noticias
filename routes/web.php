@@ -48,6 +48,7 @@ use App\Http\Controllers\NotificacaoController;
 
                     Route::get('/users', [UserController::class, 'index'])->name('users.home');
                     Route::get('/dashboard', [UserController::class, 'dashborad'])->name('users.dashboard');
+                    route::get('/notificacoes',[UserController::class,'notificacoes'])->name('users.notificacoes');
 
                     Route::get('/create', [UserController::class, 'view'])->name('users.create');
                     Route::post('/create', [UserController::class, 'save'])->name('users.save');

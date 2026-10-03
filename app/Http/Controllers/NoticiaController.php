@@ -14,6 +14,10 @@ use App\Notifications\NovaNoticia;
 
 class NoticiaController extends Controller
 {
+
+    public function n_notifications (){
+        
+    }
      
 public function index(){
 
@@ -141,24 +145,23 @@ public function  detalhes ( string $slug ){
                 "categoria_id" => $noticias_date['categoria_id'], ];
 
         $new_noticia = Noticia::create($org_noticia);
-        
-        if ( !$new_noticia->estado === "Despublicado" || !$new_noticia->estado === 'Rascunho'){
+        $admins = User::where('id','!=',Auth::user()->id)->get();
 
-            Notification::send(User::all(), new NovaNoticia($new_noticia));
+
+        if( $new_noticia->estado === 'Publicado'){
+
+            Notification::send($admins, new NovaNoticia($new_noticia));
             return redirect()->back()->with("msg", "Essa noticia foi criada com exito !");
 
         }
-
-       
-
+        
     }
 
 
     # function to show the edit form
-    public function view_edit(int $id_noticia)
-    {
-        $noticia_found = Noticia::findOrFail( $id_noticia);
+    public function view_edit(int $id_noticia) {
 
+        $noticia_found = Noticia::findOrFail( $id_noticia);
         $categorias =Categoria::all('id','nome');
         $users = User::all('id','nome');
 

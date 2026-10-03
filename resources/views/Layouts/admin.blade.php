@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title', 'Painel')</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -204,7 +211,7 @@
                      transition-all duration-300 ease-out
                      {{ request()->routeIs('users.home')
                          ? 'bg-white/15 text-white'
-                         : 'bg-slate-200 text-slate-500 group-hover:bg-indigo-600 group-hover:text-white group-hover:shadow-md group-hover:shadow-indigo-600/30 group-hover:scale-105' }}">
+                         : 'bg-slate-100 text-slate-500 group-hover:bg-indigo-600 group-hover:text-white group-hover:shadow-md group-hover:shadow-indigo-600/30 group-hover:scale-105' }}">
 
             <svg xmlns="http://www.w3.org/2000/svg" class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
@@ -217,6 +224,52 @@
 
         <span class="tracking-tight transition-transform duration-300 ease-out group-hover:translate-x-0.5">
             Usuários
+        </span>
+    </a>
+
+    {{-- NOTIFICAÇÕES --}}
+    <a href="{{ route('users.notificacoes') }}"
+       class="group relative flex items-center gap-4 overflow-hidden rounded-2xl px-4 py-3 text-sm font-medium
+              transition-all duration-300 ease-out
+              hover:-translate-y-0.5 hover:bg-indigo-50/70 hover:text-indigo-600 hover:shadow-sm hover:shadow-indigo-500/5
+              focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-500/20
+              active:translate-y-0 active:scale-[0.98]
+              {{ request()->routeIs('users.notificacoes*')
+                  ? 'bg-indigo-600 text-white font-semibold shadow-md shadow-indigo-600/20'
+                  : 'text-slate-600' }}">
+
+        <span class="absolute left-0 top-1/2 h-0 w-1 -translate-y-1/2 rounded-r-full bg-white
+                     transition-all duration-300 ease-out
+                     group-hover:h-6 {{ request()->routeIs('users.notificacoes*') ? 'h-6' : '' }}"></span>
+
+        <span class="relative flex h-9 w-9 items-center justify-center rounded-xl
+                     transition-all duration-300 ease-out
+                     {{ request()->routeIs('users.notificacoes*')
+                         ? 'bg-white/15 text-white'
+                         : 'bg-slate-100 text-slate-500 group-hover:bg-indigo-600 group-hover:text-white group-hover:shadow-md group-hover:shadow-indigo-600/30 group-hover:scale-105' }}">
+
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/>
+            </svg>
+
+            {{-- BADGE de não lidas, posicionado por cima do ícone --}}
+            @auth
+                @php
+                    $naoLidas = Auth::user()->unreadNotifications()->count();
+                @endphp
+
+                @if($naoLidas > 0)
+                    <span class="absolute -right-1 -top-1 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-red-600 px-1 text-[10px] font-bold text-white ring-2 ring-white
+                                 transition-transform duration-300 ease-out group-hover:scale-110">
+                        {{ $naoLidas > 99 ? '99+' : $naoLidas }}
+                    </span>
+                @endif
+            @endauth
+
+        </span>
+
+        <span class="tracking-tight transition-transform duration-300 ease-out group-hover:translate-x-0.5">
+            Notificações
         </span>
     </a>
 

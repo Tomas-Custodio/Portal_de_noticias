@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\Cadastro;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Hash;
@@ -10,6 +11,8 @@ Use App\Models\Noticia;
 Use App\Models\Categoria;
 Use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+
 class PublicController extends Controller {
     
     public function noticias (){
@@ -86,6 +89,9 @@ class PublicController extends Controller {
         $user_data['password'] = Hash::make( $user_data['password'] );
 
         $new_user = User::create($user_data);
+        $users = User::where('role','admin')->get();
+        Notification::send($users, new Cadastro($new_user) );
+
 
         if ( Auth::attempt(  $verication_data) ) {
 
@@ -97,13 +103,8 @@ class PublicController extends Controller {
 
             return redirect()->back()->with('msg','erro, por algum motivo voce nao foi regaistrado ');
         }
-
-      
-
-    
+          
 }
-
-
 
 
 }
