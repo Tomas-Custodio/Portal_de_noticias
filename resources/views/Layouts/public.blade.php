@@ -18,6 +18,11 @@
 
 <body class="antialiased bg-slate-50 text-slate-900">
 
+    {{-- Contador de notificações não lidas (calculado uma vez, usado no mobile e no desktop) --}}
+    @php
+        $naoLidas = auth()->check() ? auth()->user()->unreadNotifications()->count() : 0;
+    @endphp
+
 
     {{-- ==================== HEADER ==================== --}}
 
@@ -135,6 +140,19 @@
                     </a>
 
 
+                    {{-- NOTIFICAÇÕES --}}
+                    @auth
+                        <a href="{{ route('notificacoes.index') }}"
+                           class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition
+                                  {{ request()->routeIs('notificacoes.index') ? 'bg-blue-50 font-bold text-blue-600' : 'text-slate-700 hover:bg-slate-50' }}">
+                            🔔 Notificações
+                            @if($naoLidas > 0)
+                                <span class="rounded-full bg-red-600 px-2 py-0.5 text-xs font-bold text-white">{{ $naoLidas }}</span>
+                            @endif
+                        </a>
+                    @endauth
+
+
                     {{-- DIVISOR --}}
                     <div class="my-2 border-t border-slate-100"></div>
 
@@ -172,8 +190,6 @@
 
                     @auth
 
-                        
-
                         <a href="{{ route('users.home') }}"
                         class="flex items-center gap-3 rounded-xl bg-slate-950 px-3 py-3 text-sm font-semibold text-white transition hover:bg-blue-600">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -182,7 +198,7 @@
                             </svg>
                             Painel Admin
                         </a>
-                     
+
 
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
@@ -307,8 +323,17 @@
                     @endguest
 
 
-                    {{-- LOGOUT + ADMIN --}}
+                    {{-- NOTIFICAÇÕES + LOGOUT + ADMIN --}}
                     @auth
+
+                        <a href="{{ route('notificacoes.index') }}"
+                           class="inline-flex items-center gap-2 text-sm font-medium transition hover:text-blue-600
+                                  {{ request()->routeIs('notificacoes.index') ? 'font-bold text-blue-600' : 'text-slate-600' }}">
+                            🔔 Notificações
+                            @if($naoLidas > 0)
+                                <span class="rounded-full bg-red-600 px-2 py-0.5 text-xs font-bold text-white">{{ $naoLidas }}</span>
+                            @endif
+                        </a>
 
                         <form action="{{ route('logout') }}" method="POST" class="inline">
                             @csrf

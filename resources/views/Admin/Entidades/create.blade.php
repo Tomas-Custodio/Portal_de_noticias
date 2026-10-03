@@ -284,7 +284,7 @@
             <div class="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
 
                 <a
-                    href="{{ route('users.list_users') }}"
+                    href="{{ route('users.home') }}"
                     class="inline-flex justify-center rounded-xl px-5 py-3 text-sm font-semibold text-slate-600 transition hover:bg-slate-100"
                 >
                     Cancelar

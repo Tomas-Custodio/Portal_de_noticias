@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;          
+use Illuminate\Support\Facades\Notification;   
 
 use App\Models\User;
 use App\Models\Noticia;
 use App\Models\Categoria;
+use App\Notifications\NovaNoticia;            
 
 class NoticiaController extends Controller
 {
@@ -138,10 +141,15 @@ public function  detalhes ( string $slug ){
                 "categoria_id" => $noticias_date['categoria_id'], ];
 
         $new_noticia = Noticia::create($org_noticia);
+        
+        if ( !$new_noticia->estado === "Despublicado" || !$new_noticia->estado === 'Rascunho'){
 
+            Notification::send(User::all(), new NovaNoticia($new_noticia));
+            return redirect()->back()->with("msg", "Essa noticia foi criada com exito !");
 
+        }
 
-        return redirect()->back()->with("msg", "Essa noticia foi criada com exito !");
+       
 
     }
 

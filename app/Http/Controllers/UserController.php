@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\NewUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;   
 
 use App\Models\User;
 use App\Models\Categoria;
@@ -123,6 +125,9 @@ class UserController extends Controller
         # encrypting password
         $user_data['password'] = Hash::make($user_data['password']);
         $created_user = User::create($user_data);
+
+        $admins = User::where('role','admin')->where('id','!=', $created_user->id)->get();
+        Notification::send($admins, new NewUser($created_user));
 
 
         return redirect()

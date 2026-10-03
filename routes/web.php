@@ -13,6 +13,7 @@ use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\NotificacaoController;
 
 
     Route::get('/', [HomeController::class, 'Home'])->name('home');
@@ -126,8 +127,19 @@ use App\Http\Controllers\ComentarioController;
             Route::Delete('/{comentario_id}/delete', [ComentarioController::class, 'delete'])->name('comentario.delete');
 
         });
+
+
+
+    Route::middleware('auth')->prefix('notificacoes')->name('notificacoes.')->group(function () {
+
+        Route::get('/', [NotificacaoController::class, 'index'])->name('index');
+        Route::get('/contador', [NotificacaoController::class, 'contador'])->name('contador');
+        Route::post('/{id}/lida', [NotificacaoController::class, 'marcarLida'])->name('lida');
+        Route::post('/todas-lidas', [NotificacaoController::class, 'marcarTodas'])->name('todas');
+        Route::delete('/{id}', [NotificacaoController::class, 'destroy'])->name('destroy');
+    });
        
 
-    });
+});
    
 
