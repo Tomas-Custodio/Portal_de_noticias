@@ -35,7 +35,6 @@
 
                 </div>
 
-
                 <a
                     href="{{ route('categorias.home') }}"
                     class="group inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-600 shadow-sm transition-all duration-200 hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-600 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 sm:w-auto"
