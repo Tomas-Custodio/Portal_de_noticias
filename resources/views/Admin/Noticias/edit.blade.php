@@ -21,7 +21,7 @@
 
                 <span>/</span>
 
-                <a href="{{ route('noticias.list') }}"
+                <a href="{{ route('noticias') }}"
                    class="hover:text-indigo-600">
                     Notícias
                 </a>
@@ -54,7 +54,7 @@
                 </div>
 
 
-                <a href="{{ route('noticias.list') }}"
+                <a href="{{ route('noticias') }}"
                    class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50">
 
                     ← Voltar
@@ -516,7 +516,7 @@
 
                     <section>
                             <a
-                            href="{{ route('noticias.list') }}"
+                            href="{{ route('noticias') }}"
                             class="mt-3 flex w-full items-center justify-center rounded-xl border border-slate-200 px-5 py-3.5 text-sm font-semibold text-slate-600  focus:bg-red-400 hover:bg-blue-200"
                         >
                             Cancelar

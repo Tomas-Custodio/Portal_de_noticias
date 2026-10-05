@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\testController;
 
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\ApiController;
 
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\NoticiaController;
@@ -14,6 +15,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\NotificacaoController;
+
+Route::get('/apis',[ApiController::class,'index']);
 
 
     Route::get('/', [HomeController::class, 'Home'])->name('home');
@@ -76,9 +79,9 @@ use App\Http\Controllers\NotificacaoController;
                         Route::get('/create', [NoticiaController::class, 'create'])->name('noticias.create');
                         Route::post('/create', [NoticiaController::class, 'save'])->name('noticias.save');
                         Route::get('/{id}/edit', [NoticiaController::class, 'view_edit'])->name('noticias.edit');
-                        Route::put('/{id}', [NoticiaController::class, 'save_edit'])->name('noticias.update');
+                        Route::put('/{id}/update', [NoticiaController::class, 'save_edit'])->name('noticias.update');
                         Route::post('/noticias/search', [NoticiaController::class, 'search'])->name('noticias.search');
-                        Route::delete('/{id}', [NoticiaController::class, 'delete'])->name('noticias.delete'); 
+                        Route::delete('/{id}/delete', [NoticiaController::class, 'delete'])->name('noticias.delete'); 
 
                         Route::get('/rascunhos', [NoticiaController::class, 'rascunhos'])->name('noticias.rascunhos');
                         Route::get('/despublicados', [NoticiaController::class, 'despublicados'])->name('noticias.despublicados');

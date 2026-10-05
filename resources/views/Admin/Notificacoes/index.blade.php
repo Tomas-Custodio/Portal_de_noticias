@@ -88,7 +88,8 @@
 
             @php
                 $lida   = (bool) $n->read_at;
-                $titulo = $n->data['titulo'] ?? 'Notificação';
+                $titulo = $n->data['titulo'];
+                $url = $n->data['url'];
             @endphp
 
             <div class="group relative flex flex-col gap-4 overflow-hidden rounded-2xl border bg-white p-4 pl-6 transition duration-200 sm:flex-row sm:items-center
@@ -103,9 +104,13 @@
                     {{-- Conteúdo --}}
                     <div class="min-w-0 flex-1">
                         <div class="flex items-start justify-between gap-2">
+
                             <p class="text-sm font-semibold leading-snug {{ $lida ? 'text-slate-600' : 'text-slate-950' }}">
                                 {{ $titulo }}
                             </p>
+
+                             <a href="{{ $url }}">ver</a>
+                               
 
                             @unless($lida)
                                 <span class="shrink-0 rounded-md bg-blue-600 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">

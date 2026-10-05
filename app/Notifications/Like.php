@@ -46,8 +46,8 @@ class Like extends Notification
     {
         return [
             'titulo' => " o usuario {$this->user->nome} 
-             acabou de reagir com adoro a sua publicacao" . Str::limit($this->noticia->titulo,12),
-            'url' => '',
+             acabou de reagir com adoro a sua publicacao" .Str::limit($this->noticia->titulo,12),
+            'url' => route('detalhes',$this->noticia->slug),
         ];
     }
 }

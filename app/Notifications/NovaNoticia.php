@@ -40,7 +40,7 @@ class NovaNoticia extends Notification
     {
         return [
             'titulo' => "Uma nova noticia acabou de ser adicionada com o titulo de {$this->noticia->titulo}",
-            'url'    =>  route('detalhes', $this->noticia->id),
+            'url'    =>  route('detalhes', $this->noticia->slug),
         ];
     }
 
