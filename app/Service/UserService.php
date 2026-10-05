@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Http;
 
 class UserService {
 
-public function  users(){
+    public function  users(){
 
- $users = Http::get('https://jsonplaceholder.typicode.com/users');
+    $users = Http::get('https://jsonplaceholder.typicode.com/users');
 
-}
+    }
 
 
 }
