@@ -16,11 +16,16 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\NotificacaoController;
 
-Route::get('/apis',[ApiController::class,'index']);
+use App\Http\Controllers\contactController;
 
+
+    Route::get('/send-email',[contactController::class,'view'])->name('email.view');
+    Route::Post('/send-email',[ContactController::class,'send'])->name('email.send');
+
+    Route::get('/apis',[ApiController::class,'index'])->name('api.home');
+    Route::Delete('/deleteApi/{id}',[ApiController::class,'remov'])->name('api.delete');
 
     Route::get('/', [HomeController::class, 'Home'])->name('home');
-
     Route::prefix("teste")->group(function () {
 
         Route::controller(testController::class)->group(function () {

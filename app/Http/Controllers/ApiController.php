@@ -4,16 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use App\Services\UserService;
 class ApiController extends Controller {
 
- public function index(){
+ public function index ( UserService $service ){
+   
+    $users = $service->users();
 
-    $pedido = Http::get("https://jsonplaceholder.typicode.com/posts");
-    $posts = $pedido->json();
-    $posts[0]['title'] = "usuna";
+      $users = collect($users)->map(fn ($user) => (object) $user);
 
-    return $posts;
+    return view('Api.index',compact('users'));
 
  }
+
+   public function remov( Userservice $service, int $id){
+
+      $resultado = $service->remov($id);
+      dd($resultado);
+      return redirect()->route('api.home');
+      
+   }
     
 }
