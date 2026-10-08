@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Mail\contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Jobs\EnviarNotificacoes;
+use App\Jobs\EnviarEmail;
 use App\Mail\ContactMail;
 
 class ContactController extends Controller {
@@ -22,7 +24,7 @@ class ContactController extends Controller {
             'mensagem' => 'required',
         ]);
 
-        Mail::to('tomascustodio2004@gmail.com')->send( new contact($dados));
+        EnviarEmail::dispatch($dados);
       
         return back()->with('sucesso', 'Email enviado com sucesso!');
     }

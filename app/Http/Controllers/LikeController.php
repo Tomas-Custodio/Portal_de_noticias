@@ -36,7 +36,11 @@ class LikeController extends Controller {
                 # se o usuario ainda nao deu like, ele cria o like
 
                 $new_like = Like::create(['user_id' => Auth::user()->id, 'noticia_id' => $noticia_id,]);
-                $noticia->usuario->notify( new LikeNotification($noticia,$user) );
+                
+                if ( $noticia->usuario->id !== $user->id ) {
+                    
+                        $noticia->usuario->notify( new LikeNotification($noticia, $user) );
+                    }       
 
             }
 

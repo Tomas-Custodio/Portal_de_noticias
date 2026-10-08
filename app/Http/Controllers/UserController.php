@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Notifications\NewUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Notification;   
-use Illuminate\Suppor\Facades\Auth;
+use App\Jobs\EnviarNotificacoes;
 
 use App\Models\User;
 use App\Models\Categoria;
@@ -134,14 +133,14 @@ class UserController extends Controller {
 
         # encrypting password
         $user_data['password'] = Hash::make($user_data['password']);
-        $created_user = User::create($user_data);
+        $new_user = User::create($user_data);
 
-        $admins = User::where('role','admin')->where('id','!==', $created_user->id)->get();
-        Notification::send($admins, new NewUser($created_user));
+        $admins = User::where('role','admin')->where('id','!=', $new_user->id)->get();
 
-
+        EnviarNotificacoes::dispatch($admins,$new_user);
+       
         return redirect()
-            ->route('users.home')->with('msg','Usuário ' . $created_user->name . ' criado com êxito!');
+            ->route('users.home')->with('msg','Usuário ' . $new_user->name . ' criado com êxito!');
     }
 
 
